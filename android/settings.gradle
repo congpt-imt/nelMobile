@@ -1,0 +1,3 @@
+rootProject.name = 'nelMobile'
+
+include ':app'
