@@ -1,5 +1,5 @@
 # Natural E-Learning Mobile
-We will build the app on the windows system
+We will build the app on the Windows system
 
 ## Requirment
 Node.js version 8 or later.\
@@ -18,7 +18,7 @@ choco install -y nodejs.install python2 jdk8
 
 ### React Native
 Node comes with npm.\
-Run the following command in CMD:
+Run the following command in CMD to install the React Native:
 
 ```
 npm install -g react-native-cli
