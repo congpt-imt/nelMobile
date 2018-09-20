@@ -1,9 +1,11 @@
 # Natural E-Learning Mobile
+We will build the app on the windows system
+
 ## Requirment
 Node.js version 8 or later.\
 npm version 6 or later.\
 Python2.\
-JDK.\
+JDK.
 
 ## Installation
 ### Node, JDK, Python2
