@@ -7,24 +7,13 @@
  */
 
 import React, {Component} from 'react';
-import SplashScreen from './app/root/splashScreen';
+import Router from './app/router'
 
-type Props = {};
-export default class App extends Component<Props> {
-
-    componentWillMount() {
-        this.state = {
-            view: <SplashScreen/>
-        }
-
-        setTimeout(() => {
-            console.log('Waiting!')
-        }, 2000)
-    };
+export default class App extends Component {
 
     render() {
         return (
-            this.state.view
+            <Router/>
         );
     }
 }
