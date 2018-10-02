@@ -2,6 +2,8 @@ import LoginScreen from './root/loginScreen';
 import RegisterScreen from './root/registerScreen';
 import BottomTabNavigator from './components/tabBar/bottomTabNavigator';
 import { StackNavigator } from 'react-navigation';
+import Icon from 'react-native-vector-icons/Ionicons';
+// import React from "react";
 
 const Router = StackNavigator(
     {
@@ -19,13 +21,21 @@ const Router = StackNavigator(
             }
         },
 
-        TabBar: BottomTabNavigator,
+        TabBar: {
+            screen: BottomTabNavigator,
+            // navigationOptions: {
+            //     headerLeft: (
+            //         <View>
+            //             <Icon name={'ios-arrow-back'} color={'#FFFFFF'} size={20}/>
+            //         </View>)
+            // }
+        },
     },
     {
         initialRouteName: 'Login',
         navigationOptions: {
             headerStyle: {
-                backgroundColor: '#192536'
+                backgroundColor: '#25232E'
             },
         }
     }

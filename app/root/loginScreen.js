@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import {StyleSheet, View, Button, Image, Text, ImageBackground} from 'react-native';
 import {Constants} from "../constants";
 import DarkTextInput from '../components/darkComponent/darkTextInput';
+import ButtonCustom from '../components/darkComponent/buttonCustom';
 
 export default class LoginScreen extends Component {
-
     render() {
         return (
             <View style={styles.container}>
@@ -36,7 +36,8 @@ export default class LoginScreen extends Component {
 
                 <View style={styles.btn_Container}>
                     <View style={styles.btn_Sign_In}>
-                        <Button title={'Sign in'} onPress={() => this.props.navigation.navigate('TabBar')}/>
+                        {/*<Button title={'Sign in'} onPress={() => this.props.navigation.navigate('TabBar')}/>*/}
+                        <ButtonCustom onPress={() => this.props.navigation.navigate('TabBar')} title={'SIGN IN'}/>
                     </View>
                     <View style={styles.btn_Register}>
                         <Text style={{fontSize: 15, fontFamily: 'System', color: 'white'}}
