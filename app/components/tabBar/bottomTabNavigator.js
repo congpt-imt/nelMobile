@@ -17,7 +17,7 @@ const BottomTabNavigator = createBottomTabNavigator(
             // showLabel: (Platform.OS !== 'android'),
             style: {
                 backgroundColor: '#2F2D3B',
-                height: Constants.SIZE_WINDOW.height/10,
+                height: Constants.SIZE_WINDOW.height/12,
                 borderTopWidth: 2,
             },
             labelStyle: {

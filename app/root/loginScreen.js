@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, Button, Image, Text, ImageBackground} from 'react-native';
+import {StyleSheet, View, Image, Text, ImageBackground} from 'react-native';
 import {Constants} from "../constants";
 import DarkTextInput from '../components/darkComponent/darkTextInput';
 import ButtonCustom from '../components/darkComponent/buttonCustom';
+import RF from 'react-native-responsive-fontsize';
 
 export default class LoginScreen extends Component {
     render() {
@@ -36,11 +37,13 @@ export default class LoginScreen extends Component {
 
                 <View style={styles.btn_Container}>
                     <View style={styles.btn_Sign_In}>
-                        {/*<Button title={'Sign in'} onPress={() => this.props.navigation.navigate('TabBar')}/>*/}
                         <ButtonCustom onPress={() => this.props.navigation.navigate('TabBar')} title={'SIGN IN'}/>
                     </View>
+                    <View style={styles.btn_Sign_In}>
+                        <ButtonCustom title={'or Login with Socials'}/>
+                    </View>
                     <View style={styles.btn_Register}>
-                        <Text style={{fontSize: 15, fontFamily: 'System', color: 'white'}}
+                        <Text style={{fontSize: RF(2.7), fontFamily: 'System', color: 'white'}}
                               onPress={() => this.props.navigation.navigate('Register')}>Create Account</Text>
                     </View>
                 </View>
@@ -81,13 +84,13 @@ const styles = StyleSheet.create({
     btn_Container: {
         marginLeft: 8,
         marginRight: 8,
-        flex: 3 / 4,
+        flex: 1,
     },
     btn_Sign_In: {
-        flex: 2,
+        flex: 1,
     },
     btn_Register: {
-        flex: 1,
+        flex: 1/2,
         alignItems: 'center',
     },
 });

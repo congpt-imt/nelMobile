@@ -7,17 +7,17 @@ export default class DarkTextInput extends Component {
         super(props);
         this.state = {
             input_type: this.props.input_type,
-            borderBottomWidth: 1,
+            borderBottomWidth: 0.3,
             text: '',
         };
     }
 
     _onFocus = () => {
-        this.setState({borderBottomWidth: 3})
+        this.setState({borderBottomWidth: 1.5})
     }
 
     _onBlur = () => {
-        this.setState({borderBottomWidth: 1})
+        this.setState({borderBottomWidth: 0.3})
     }
 
     render() {

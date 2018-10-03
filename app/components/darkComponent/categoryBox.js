@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TouchableWithoutFeedback, Animated } from 'react-native';
+import { StyleSheet, Text, View, TouchableWithoutFeedback, Animated, ImageBackground} from 'react-native';
 import {Constants} from "../../constants";
 import PropTypes from "prop-types";
 
@@ -39,7 +39,19 @@ export default class CategoryBox extends Component {
                     onPress={this.props.onPress}
                 >
                     <Animated.View style={[styles.button, animatedStyle]}>
-                        <Text style={styles.text}>{this.props.category_name}</Text>
+                        <ImageBackground
+                            style={{
+                                flex: 1,
+                                width: this.props.width,
+                                height: this.props.height,
+                                alignItems: 'center',
+                                justifyContent: 'flex-end',
+                                margin: 5
+                            }}
+                            source={{uri: this.props.image}}
+                        >
+                            <Text style={styles.text}>{this.props.category_name}</Text>
+                        </ImageBackground>
                     </Animated.View>
                 </TouchableWithoutFeedback>
             </View>
@@ -54,17 +66,18 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     button: {
-        backgroundColor: "#2F2D3B",
-        width: Constants.SIZE_WINDOW.width/2 - 20,
-        height: Constants.SIZE_WINDOW.width/2 - 20,
-        alignItems: "center",
-        justifyContent: "center",
+        backgroundColor: 'transparent',
     },
     text: {
-        color: "#FFFFFF"
+        color: '#FFF',
+        fontSize: 20,
+        marginBottom: 10
     }
 });
 
 CategoryBox.PropTypes = {
-    category_name: PropTypes.string
+    category_name: PropTypes.string,
+    image: PropTypes.string,
+    width: PropTypes.double,
+    height: PropTypes.double
 }
