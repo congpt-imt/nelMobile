@@ -2,13 +2,14 @@ import React, {Component} from "react";
 import {RecyclerListView, DataProvider, LayoutProvider} from "recyclerlistview";
 import {Constants} from "../../constants";
 import {TeacherService} from "../../services/api/teacherService";
-import TeacherBox from "../darkComponent/teacherBox";
+import ChatBox from "../darkComponent/chatBox";
+
 const ViewTypes = {
     FULL: 0,
     HALF: 1
 }
 
-export default class TeacherListView extends Component {
+export default class ChatHistoryListView extends Component {
     constructor(args) {
         super(args);
 
@@ -22,7 +23,7 @@ export default class TeacherListView extends Component {
                 switch (type) {
                     case ViewTypes.FULL:
                         dim.width = Constants.SIZE_WINDOW.width;
-                        dim.height = Constants.SIZE_WINDOW.height / 5;
+                        dim.height = Constants.SIZE_WINDOW.height / 5.5;
                         break;
                     default:
                         dim.width = 0;
@@ -64,7 +65,7 @@ export default class TeacherListView extends Component {
     }
 
     _rowRenderer() {
-        return <TeacherBox/>
+        return <ChatBox/>
     }
 
     render() {

@@ -1,15 +1,17 @@
 import {createBottomTabNavigator} from 'react-navigation';
-import Home from '../../screen/home/homeScreen';
-import Chat from '../../screen/chat/chatScreen';
-import Profile from '../../screen/profile/profileScreen';
+import HomeStack from './homeTabNavigator';
+import Home from '../screen/home/homeScreen';
+import Chat from '../screen/chat/chatScreen';
+import Profile from '../screen/profile/profileScreen';
 import React from "react";
-import {Constants} from "../../constants";
+import {Constants} from "../constants";
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import ChatStack from "./chatTabNavigator";
 
 const BottomTabNavigator = createBottomTabNavigator(
     {
-        Home: Home,
-        Chat: Chat,
+        Home: HomeStack,
+        Chat: ChatStack,
         Profile: Profile,
     },
     {

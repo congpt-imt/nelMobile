@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { RecyclerListView, DataProvider, LayoutProvider } from "recyclerlistview";
+import React, {Component} from "react";
+import {RecyclerListView, DataProvider, LayoutProvider} from "recyclerlistview";
 import CategoryBox from "../darkComponent/categoryBox";
 import {CategoryService} from "../../services/api/categoryService";
 import {Constants} from "../../constants";
@@ -9,7 +9,7 @@ const ViewTypes = {
     HALF: 1
 }
 
-export default class RecycleTestComponent extends Component {
+export default class CategoryListView extends Component {
     constructor(args) {
         super(args);
 
@@ -70,24 +70,34 @@ export default class RecycleTestComponent extends Component {
         }
     }
 
-    _rowRenderer(type, data) {
-        switch (type) {
-            case ViewTypes.HALF:
-                return <CategoryBox image={data.image} category_name={data.name} width={(Constants.SIZE_WINDOW.width-10)/2} height={(Constants.SIZE_WINDOW.width-10)/2} />;
-                break;
-            case ViewTypes.FULL:
-                return <CategoryBox image={data.image} category_name={data.name} width={(Constants.SIZE_WINDOW.width-5)} height={(Constants.SIZE_WINDOW.width-10)/2}/>;
-                break;
-        }
-    }
-
     render() {
+        const {onPress} = this.props;
+
         return <RecyclerListView
-            style={{ flex: 1 }}
+            style={{flex: 1}}
             // contentContainerStyle={{ margin: 4 }}
             layoutProvider={this.state.layoutProvider}
             dataProvider={this.state.dataProvider}
-            rowRenderer={this._rowRenderer}
+            rowRenderer={(type, data) => {
+                switch (type) {
+                    case ViewTypes.HALF:
+                        return <CategoryBox
+                            image={data.image}
+                            category_name={data.name}
+                            width={(Constants.SIZE_WINDOW.width - 10) / 2}
+                            height={(Constants.SIZE_WINDOW.width - 10) / 2}
+                            onPress={onPress}/>;
+                        break;
+                    case ViewTypes.FULL:
+                        return <CategoryBox
+                            image={data.image}
+                            category_name={data.name}
+                            width={(Constants.SIZE_WINDOW.width - 5)}
+                            height={(Constants.SIZE_WINDOW.width - 10) / 2}
+                            onPress={onPress}/>;
+                        break;
+                }
+            }}
         />;
     }
 }

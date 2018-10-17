@@ -1,7 +1,5 @@
-import React, { Component } from 'react';
-import { StyleSheet, Text, View, TouchableWithoutFeedback, Animated, ImageBackground} from 'react-native';
-import {Constants} from "../../constants";
-import PropTypes from "prop-types";
+import React, {Component} from 'react';
+import {StyleSheet, Text, View, TouchableWithoutFeedback, Animated, ImageBackground} from 'react-native';
 
 export default class CategoryBox extends Component {
     constructor(props) {
@@ -20,6 +18,7 @@ export default class CategoryBox extends Component {
             toValue: .8
         }).start()
     }
+
     handlePressOut() {
         Animated.spring(this.animatedValue, {
             toValue: 1,
@@ -27,30 +26,34 @@ export default class CategoryBox extends Component {
             tension: 40
         }).start()
     }
+
     render() {
+        const {width, height, image, category_name, onPress} = this.props;
+
         const animatedStyle = {
-            transform: [{ scale: this.animatedValue}]
-        }
+            transform: [{scale: this.animatedValue}]
+        };
+
         return (
             <View style={styles.container}>
                 <TouchableWithoutFeedback
                     onPressIn={this.handlePressIn}
                     onPressOut={this.handlePressOut}
-                    onPress={this.props.onPress}
+                    onPress={onPress}
                 >
                     <Animated.View style={[styles.button, animatedStyle]}>
                         <ImageBackground
                             style={{
                                 flex: 1,
-                                width: this.props.width,
-                                height: this.props.height,
+                                width: width,
+                                height: height,
                                 alignItems: 'center',
                                 justifyContent: 'flex-end',
                                 margin: 5
                             }}
-                            source={{uri: this.props.image}}
+                            source={{uri: image}}
                         >
-                            <Text style={styles.text}>{this.props.category_name}</Text>
+                            <Text style={styles.text}>{category_name}</Text>
                         </ImageBackground>
                     </Animated.View>
                 </TouchableWithoutFeedback>
@@ -74,10 +77,3 @@ const styles = StyleSheet.create({
         marginBottom: 10
     }
 });
-
-CategoryBox.PropTypes = {
-    category_name: PropTypes.string,
-    image: PropTypes.string,
-    width: PropTypes.double,
-    height: PropTypes.double
-}

@@ -1,11 +1,11 @@
-import LoginScreen from './root/loginScreen';
-import RegisterScreen from './root/registerScreen';
-import BottomTabNavigator from './components/tabBar/bottomTabNavigator';
+import LoginScreen from '../root/loginScreen';
+import RegisterScreen from '../root/registerScreen';
+import BottomTabNavigator from './bottomTabNavigator';
 import { StackNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/Ionicons';
 import React from "react";
 import {View} from 'react-native';
-import {Constants} from "./constants";
+import {Constants} from "../constants";
 
 const Router = StackNavigator(
     {

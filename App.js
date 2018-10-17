@@ -7,7 +7,7 @@
  */
 
 import React, {Component} from 'react';
-import Router from './app/router'
+import Router from './app/routes/router'
 
 export default class App extends Component {
 
