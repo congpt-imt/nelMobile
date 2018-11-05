@@ -3,10 +3,7 @@ import {RecyclerListView, DataProvider, LayoutProvider} from "recyclerlistview";
 import {Constants} from "../../constants";
 import {TeacherService} from "../../services/api/teacherService";
 import TeacherBox from "../darkComponent/teacherBox";
-const ViewTypes = {
-    FULL: 0,
-    HALF: 1
-}
+
 
 export default class TeacherListView extends Component {
     constructor(args) {
@@ -15,12 +12,12 @@ export default class TeacherListView extends Component {
         let layoutProvider = new LayoutProvider(
             index => {
                 if (index) {
-                    return ViewTypes.FULL;
+                    return Constants.VIEW_TYPE_FULL;
                 }
             },
             (type, dim) => {
                 switch (type) {
-                    case ViewTypes.FULL:
+                    case Constants.VIEW_TYPE_FULL:
                         dim.width = Constants.SIZE_WINDOW.width;
                         dim.height = Constants.SIZE_WINDOW.height / 5;
                         break;
@@ -63,18 +60,19 @@ export default class TeacherListView extends Component {
         }
     }
 
-    _rowRenderer() {
-        return <TeacherBox/>
-    }
-
     render() {
-        const {onPress} = this.props;
-
         return <RecyclerListView
             style={{flex: 1}}
             layoutProvider={this.state.layoutProvider}
             dataProvider={this.state.dataProvider}
-            rowRenderer={this._rowRenderer}
+            rowRenderer={(type, data) => {
+                return <TeacherBox
+                        image={data.image}
+                        teacher_name={data.name}
+                        description={data.describe}
+                        onPress={() => this.props.navigation.navigate('Teacher_Profile')}
+                    />
+            }}
         />;
     }
 }

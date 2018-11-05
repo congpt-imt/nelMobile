@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {StyleSheet, TouchableWithoutFeedback, View, Image, Text} from 'react-native';
 import StarRating from 'react-native-star-rating';
-import Ionicons from 'react-native-vector-icons/Ionicons'
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import AvatarBox from "./avatarBox";
 
 export default class TeacherBox extends Component {
     constructor(props) {
@@ -16,20 +17,25 @@ export default class TeacherBox extends Component {
     }
 
     render() {
-        const {onPress} = this.props;
+        const {description, teacher_name, image, onPress} = this.props;
         const text = 'Là một kỹ sư phần mềm tại công ty IMT Solutions từ năm 2017. Đã có hơn 1 năm kinh nghiệm trong lĩnh vực lập trình';
 
         return (
             <View style={styles.container_fluid}>
-                <TouchableWithoutFeedback >
+                <TouchableWithoutFeedback onPress={onPress}>
                     <View style={styles.container}>
                         <View style={styles.image_teacher}>
-                            <Image source={{ uri:"https://images.pexels.com/photos/719609/pexels-photo-719609.jpeg" }} style={styles.profileImg}/>
+                            <AvatarBox
+                                image={image}
+                                sizeAvatar={90}
+                                sizeIsOnline={15}
+                            />
                         </View>
                         <View style={styles.describe_teacher}>
                             <View style={styles.teacher_name}>
-                                <Text style={styles.text_name}>Phạm Thành Công</Text>
+                                <Text style={styles.text_name}>{teacher_name}</Text>
                             </View>
+
                             <View style={styles.rating}>
                                 <StarRating
                                     disabled={true}
@@ -80,12 +86,12 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         marginLeft: 6,
     },
-    profileImg: {
-        height: 90,
-        width: 90,
-        borderRadius: 50,
-        overflow: 'hidden'
-    },
+    // profileImg: {
+    //     height: 90,
+    //     width: 90,
+    //     borderRadius: 50,
+    //     overflow: 'hidden'
+    // },
     teacher_name: {
         flex: 1,
         fontSize: 20,

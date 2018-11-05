@@ -4,11 +4,6 @@ import CategoryBox from "../darkComponent/categoryBox";
 import {CategoryService} from "../../services/api/categoryService";
 import {Constants} from "../../constants";
 
-const ViewTypes = {
-    FULL: 0,
-    HALF: 1
-}
-
 export default class CategoryListView extends Component {
     constructor(args) {
         super(args);
@@ -16,18 +11,18 @@ export default class CategoryListView extends Component {
         let layoutProvider = new LayoutProvider(
             index => {
                 if (index - 8 === 0) {
-                    return ViewTypes.FULL;
+                    return Constants.VIEW_TYPE_FULL;
                 } else {
-                    return ViewTypes.HALF;
+                    return Constants.VIEW_TYPE_HALF;
                 }
             },
             (type, dim) => {
                 switch (type) {
-                    case ViewTypes.HALF:
+                    case Constants.VIEW_TYPE_HALF:
                         dim.width = Constants.SIZE_WINDOW.width / 2;
                         dim.height = Constants.SIZE_WINDOW.width / 2;
                         break;
-                    case ViewTypes.FULL:
+                    case Constants.VIEW_TYPE_FULL:
                         dim.width = Constants.SIZE_WINDOW.width;
                         dim.height = Constants.SIZE_WINDOW.width / 2;
                         break;
@@ -80,7 +75,7 @@ export default class CategoryListView extends Component {
             dataProvider={this.state.dataProvider}
             rowRenderer={(type, data) => {
                 switch (type) {
-                    case ViewTypes.HALF:
+                    case Constants.VIEW_TYPE_HALF:
                         return <CategoryBox
                             image={data.image}
                             category_name={data.name}
@@ -88,7 +83,7 @@ export default class CategoryListView extends Component {
                             height={(Constants.SIZE_WINDOW.width - 10) / 2}
                             onPress={onPress}/>;
                         break;
-                    case ViewTypes.FULL:
+                    case Constants.VIEW_TYPE_FULL:
                         return <CategoryBox
                             image={data.image}
                             category_name={data.name}

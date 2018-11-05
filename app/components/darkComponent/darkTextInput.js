@@ -21,7 +21,6 @@ export default class DarkTextInput extends Component {
     }
 
     render() {
-
         if (this.state.input_type === 'Password') {
             return (
                 <TextInput
@@ -42,7 +41,6 @@ export default class DarkTextInput extends Component {
 
         return (
             <TextInput
-
                 value={this.state.text}
                 onChangeText={(text) => this.setState({text})}
                 placeholder={this.state.input_type}

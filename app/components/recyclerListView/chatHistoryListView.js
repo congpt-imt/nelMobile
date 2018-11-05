@@ -1,13 +1,8 @@
-import React, {Component} from "react";
-import {RecyclerListView, DataProvider, LayoutProvider} from "recyclerlistview";
-import {Constants} from "../../constants";
-import {TeacherService} from "../../services/api/teacherService";
+import React, { Component } from "react";
+import { RecyclerListView, DataProvider, LayoutProvider } from "recyclerlistview";
+import { Constants } from "../../constants";
+import { TeacherService } from "../../services/api/teacherService";
 import ChatBox from "../darkComponent/chatBox";
-
-const ViewTypes = {
-    FULL: 0,
-    HALF: 1
-}
 
 export default class ChatHistoryListView extends Component {
     constructor(args) {
@@ -16,18 +11,16 @@ export default class ChatHistoryListView extends Component {
         let layoutProvider = new LayoutProvider(
             index => {
                 if (index) {
-                    return ViewTypes.FULL;
+                    return Constants.VIEW_TYPE_FULL;
                 }
             },
             (type, dim) => {
-                switch (type) {
-                    case ViewTypes.FULL:
-                        dim.width = Constants.SIZE_WINDOW.width;
-                        dim.height = Constants.SIZE_WINDOW.height / 5.5;
-                        break;
-                    default:
-                        dim.width = 0;
-                        dim.height = 0;
+                if (type === Constants.VIEW_TYPE_FULL) {
+                    dim.width = Constants.SIZE_WINDOW.width;
+                    dim.height = Constants.SIZE_WINDOW.height / 5.5;
+                } else {
+                    dim.width = 0;
+                    dim.height = 0;
                 }
             }
         );
@@ -64,18 +57,16 @@ export default class ChatHistoryListView extends Component {
         }
     }
 
-    _rowRenderer() {
-        return <ChatBox/>
-    }
-
     render() {
-        const {onPress} = this.props;
+        const { onPress } = this.props;
 
         return <RecyclerListView
-            style={{flex: 1}}
+            style={{ flex: 1 }}
             layoutProvider={this.state.layoutProvider}
             dataProvider={this.state.dataProvider}
-            rowRenderer={this._rowRenderer}
+            rowRenderer={(type, data) => {
+                return <ChatBox onPress={() => this.props.navigation.navigate('Chat')}/>
+            }}
         />;
     }
 }

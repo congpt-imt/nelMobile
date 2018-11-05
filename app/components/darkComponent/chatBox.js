@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
-import {StyleSheet, TouchableWithoutFeedback, View, Image, Text} from 'react-native';
+import {StyleSheet, TouchableWithoutFeedback, View, Text} from 'react-native';
+import AvatarBox from "./avatarBox";
+import {generalStyle} from "../../resources/stylesheet/stylesheet";
 
 export default class ChatBox extends Component {
     trunc(text) {
@@ -12,11 +14,16 @@ export default class ChatBox extends Component {
 
         return (
             <View style={styles.container_fluid}>
-                <TouchableWithoutFeedback >
-                    <View style={styles.container}>
+                <TouchableWithoutFeedback onPress={onPress}>
+                    <View style={generalStyle.container_row}>
                         <View style={styles.image_teacher}>
-                            <Image source={{ uri:"https://images.pexels.com/photos/719609/pexels-photo-719609.jpeg" }} style={styles.profileImg}/>
+                            <AvatarBox
+                                image={"https://images.pexels.com/photos/719609/pexels-photo-719609.jpeg"}
+                                sizeAvatar={70}
+                                sizeIsOnline={15}
+                            />
                         </View>
+
                         <View style={styles.chat_box}>
                             <View style={styles.teacher_name}>
                                 <Text style={styles.text_name}>Hoàng Văn Bình</Text>
@@ -40,11 +47,6 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         alignItems: 'center',
     },
-    container: {
-        flex: 1,
-        flexDirection: 'row',
-        backgroundColor: '#1B1A20',
-    },
     image_teacher: {
         flex: 2.5 / 10,
         backgroundColor: 'transparent',
@@ -56,24 +58,15 @@ const styles = StyleSheet.create({
         flex: 7.5 / 10,
         backgroundColor: 'transparent',
         height: '100%',
-        // justifyContent:'center',
         marginLeft: 6,
-    },
-    profileImg: {
-        height: 70,
-        width: 70,
-        borderRadius: 40,
-        overflow: 'hidden'
     },
     teacher_name: {
         flex: 2,
-        fontSize: 20,
-        color: '#fff',
         justifyContent: 'center',
     },
     text_name: {
         fontSize: 17,
-        color: '#fff'
+        color: '#FFFFFF'
     },
     chat_text: {
         flex: 1.5,
@@ -90,7 +83,7 @@ const styles = StyleSheet.create({
     last_hour_chat: {
         flex: 2/10,
         fontSize: 14,
-        color: '#fff',
+        color: '#FFFFFF',
         textAlign: 'right',
     }
 });

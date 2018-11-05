@@ -4,7 +4,7 @@ import Home from '../screen/home/homeScreen';
 import Chat from '../screen/chat/chatScreen';
 import Profile from '../screen/profile/profileScreen';
 import React from "react";
-import {Constants} from "../constants";
+import {ColorTheme, Constants} from "../constants";
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import ChatStack from "./chatTabNavigator";
 
@@ -18,7 +18,7 @@ const BottomTabNavigator = createBottomTabNavigator(
         tabBarOptions : {
             // showLabel: (Platform.OS !== 'android'),
             style: {
-                backgroundColor: '#2F2D3B',
+                backgroundColor: ColorTheme.BAR_COLOR,
                 height: Constants.SIZE_WINDOW.height/12,
                 borderTopWidth: 2,
             },

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Animated, Image, Easing} from 'react-native';
 import PropTypes from 'prop-types';
-import '../constants';
+import '../../constants';
 import {Constants} from "../constants";
 
 export default class SlideImage extends Component{

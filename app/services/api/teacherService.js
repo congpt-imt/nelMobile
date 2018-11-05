@@ -9,4 +9,9 @@ export class TeacherService {
 
         return result;
     }
+
+    static getTeacher() {
+        const teacher = require('../../json_tmp/teacher_details');
+        return teacher.data;
+    }
 }
