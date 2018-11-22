@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { TouchableHighlight, View, Text, StyleSheet } from "react-native";
+import { TouchableOpacity, View, Text, StyleSheet } from "react-native";
 import RF from 'react-native-responsive-fontsize';
 
 export default class ButtonCustom extends Component {
@@ -8,13 +8,13 @@ export default class ButtonCustom extends Component {
         const { onPress, title } = this.props;
 
         return (
-            <TouchableHighlight onPress={onPress}>
+            <TouchableOpacity onPress={onPress}>
                 <View style={styles.button}>
                     <Text style={styles.buttonText}>
                         {title}
                     </Text>
                 </View>
-            </TouchableHighlight>
+            </TouchableOpacity>
         );
     }
 }

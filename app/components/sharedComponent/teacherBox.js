@@ -3,6 +3,7 @@ import {StyleSheet, TouchableWithoutFeedback, View, Image, Text} from 'react-nat
 import StarRating from 'react-native-star-rating';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AvatarBox from "./avatarBox";
+import {ColorTheme} from "../../constants";
 
 export default class TeacherBox extends Component {
     constructor(props) {
@@ -70,7 +71,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'row',
-        backgroundColor: '#1B1A20',
+        backgroundColor: ColorTheme.BACKGROUND_COLOR,
     },
     image_teacher: {
         flex: 3 / 10,
