@@ -7,7 +7,9 @@
  */
 
 import React, {Component} from 'react';
-import Router from './app/routes/router'
+import { Provider } from 'react-redux';
+import Router from './app/routes/router';
+// import { configureStore } from './app/store';
 
 export default class App extends Component {
 
@@ -17,3 +19,10 @@ export default class App extends Component {
         );
     }
 }
+// const store = configureStore();
+// const App = () =>
+//     <Provider store={store}>
+//         <Router/>
+//     </Provider>
+//
+// export default App;

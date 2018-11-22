@@ -1,0 +1,70 @@
+{
+  "data": [
+    {
+      "text": "Chào bạn",
+      "image": "",
+      "time": "10:55",
+      "isCurrentUser": true
+    },
+    {
+      "text": "Chào bạn, rất vui được gặp bạn, hôm qua em tới trường mẹ dắt tay từng bước, hôm nay mẹ lên nương một mình em tới lớp, trường của em bé bé nằm lặng giữa rưng cây, cô giáo em tre trẻ day em hát rất hay",
+      "image": "https://images.pexels.com/photos/218983/pexels-photo-218983.jpeg",
+      "time": "10:55",
+      "isCurrentUser": false
+    },
+    {
+      "text": "Bạn có thể giúp mình cái này được không",
+      "image": "",
+      "time": "10:56",
+      "isCurrentUser": true
+    },
+    {
+      "text": "OK, mình luôn sẵn lòng",
+      "image": "https://images.pexels.com/photos/218983/pexels-photo-218983.jpeg",
+      "time": "10:56",
+      "isCurrentUser": false
+    },
+    {
+      "text": "Cám ơn bạn",
+      "image": "",
+      "time": "10:57",
+      "isCurrentUser": true
+    },
+    {
+      "text": "Không có chi, ủa mà bạn muốn mình giúp gì sao không nói đi, còn chần chờ gì nữa ",
+      "image": "https://images.pexels.com/photos/218983/pexels-photo-218983.jpeg",
+      "time": "10:59",
+      "isCurrentUser": false
+    },
+    {
+      "text": "Mình ngại quá mình không dám nói",
+      "image": "",
+      "time": "10:59",
+      "isCurrentUser": true
+    },
+    {
+      "text": "Thôi nói nhanh đi để tui còn đi làm việc nữa",
+      "image": "https://images.pexels.com/photos/218983/pexels-photo-218983.jpeg",
+      "time": "11:00",
+      "isCurrentUser": false
+    },
+    {
+      "text": "Bạn xem dùm mình cái hình này nha https://images.pexels.com/photos/218983/pexels-photo-218983.jpeg",
+      "image": "",
+      "time": "11:00",
+      "isCurrentUser": true
+    },
+    {
+      "text": "Hình này tui chụp đó",
+      "image": "",
+      "time": "11:01",
+      "isCurrentUser": true
+    },
+    {
+      "text": "Vậy để tui cho bạn coi hình này https://images.pexels.com/photos/634010/pexels-photo-634010.jpeg",
+      "image": "https://images.pexels.com/photos/218983/pexels-photo-218983.jpeg",
+      "time": "11:01",
+      "isCurrentUser": false
+    }
+  ]
+}

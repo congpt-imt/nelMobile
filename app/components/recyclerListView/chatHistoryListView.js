@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { RecyclerListView, DataProvider, LayoutProvider } from "recyclerlistview";
 import { Constants } from "../../constants";
 import { TeacherService } from "../../services/api/teacherService";
-import ChatBox from "../darkComponent/chatBox";
+import ChatBox from "../sharedComponent/chatBox";
 
 export default class ChatHistoryListView extends Component {
     constructor(args) {

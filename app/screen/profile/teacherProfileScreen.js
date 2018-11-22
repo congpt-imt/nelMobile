@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {StyleSheet, View, Text, Image, ScrollView} from 'react-native';
 import StarRating from 'react-native-star-rating';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import AvatarBox from "../../components/darkComponent/avatarBox";
+import AvatarBox from "../../components/sharedComponent/avatarBox";
 import {TeacherService} from '../../services/api/teacherService';
 import {ColorTheme} from "../../constants";
 
@@ -39,7 +39,7 @@ export default class TeacherProfile extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#1B1A20',
+        backgroundColor: ColorTheme.BACKGROUND_COLOR,
     },
     avatar: {
         height: 140,

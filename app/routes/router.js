@@ -1,5 +1,5 @@
-import LoginScreen from '../root/loginScreen';
-import RegisterScreen from '../root/registerScreen';
+import LoginScreen from '../screen/root/loginScreen';
+import RegisterScreen from '../screen/root/registerScreen';
 import BottomTabNavigator from './bottomTabNavigator';
 import { StackNavigator } from 'react-navigation';
 import React from "react";

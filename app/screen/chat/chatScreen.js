@@ -1,14 +1,28 @@
 import React, {Component} from 'react';
-import {View, TextInput, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, TextInput, StyleSheet, TouchableOpacity, ScrollView} from 'react-native';
 import {generalStyle} from "../../resources/stylesheet/stylesheet";
 import {ColorTheme, Constants} from "../../constants";
 import Icon from "react-native-vector-icons/Ionicons";
+import MessageList from "../../components/chatComponent/messageList";
 
 export default class Chat extends Component {
+    constructor() {
+        super();
+
+        const data = require('../../json_tmp/chat');
+        const messages = data.data;
+
+        this.state = {
+            message: messages
+        }
+    }
     render() {
         return (
             <View style={generalStyle.container}>
-                <View style={styles.message_list}></View>
+                <View style={styles.message_list}>
+                    <MessageList data={this.state.message}/>
+                </View>
+
                 <View style={styles.message_form}>
                     <View style={styles.message_input}>
                         <TextInput
@@ -30,13 +44,14 @@ export default class Chat extends Component {
 
 const styles = StyleSheet.create({
     message_list: {
-        flex: 9 / 10,
+        flex: 1,
     },
     message_form: {
-        flex: 1 / 10,
+        height: 60,
         flexDirection: 'row',
         backgroundColor: ColorTheme.BAR_COLOR,
         borderTopWidth: 2,
+        borderColor: '#1A181F'
     },
     message_input: {
         flex: 9/10,
@@ -48,7 +63,10 @@ const styles = StyleSheet.create({
         width: Constants.SIZE_WINDOW.width/1.2,
         borderColor: 'gray',
         borderWidth: 1,
-        borderRadius: 1000
+        borderRadius: 1000,
+        paddingLeft: 15,
+        color: ColorTheme.TEXT_COLOR,
+        fontSize: 15
     },
     send_button: {
         flex: 1/10,

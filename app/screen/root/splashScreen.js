@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import RF from 'react-native-responsive-fontsize';
-import SlideImage from "../components/animationComponent/slideImage";
+import SlideImage from "../../components/animationComponent/slideImage";
 
 export default class SplashScreen extends Component {
 
@@ -9,7 +9,7 @@ export default class SplashScreen extends Component {
         return (
             <View style={styles.container}>
                 <Text style={styles.welcome}>Natural</Text>
-                <SlideImage img={require('../resources/images/elearning.png')}/>
+                <SlideImage img={require('../../resources/images/elearning.png')}/>
             </View>
         );
     }

@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, Image, KeyboardAvoidingView} from 'react-native';
-import {ColorTheme, Constants} from "../constants";
+import {ColorTheme, Constants} from "../../constants";
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view'
-import LoginForm from "../components/form/loginForm";
+import LoginForm from "../../components/form/loginForm";
 
 export default class LoginScreen extends Component {
     render() {
@@ -14,7 +14,7 @@ export default class LoginScreen extends Component {
                             width: Constants.SIZE_WINDOW.width * 0.8,
                             height: Constants.SIZE_WINDOW.height * 0.15
                         }}
-                        source={require('../resources/images/logo.png')}
+                        source={require('../../resources/images/logo.png')}
                     />
                 </View>
 

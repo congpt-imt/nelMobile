@@ -8,17 +8,34 @@ import {ColorTheme, Constants} from "../constants";
 import Icon from 'react-native-vector-icons/Ionicons';
 
 const HomeStack = createStackNavigator(
+    // {
+    //     Home: Home,
+    //     List_Teacher: TeacherListView,
+    //     Teacher_Profile: TeacherProfile
+    // }
     {
         Home: {
             screen: Home,
             navigationOptions: {
-                title: 'Home'
+                title: 'Home',
+                headerLeft: (
+                    <View style={{marginLeft: 20}}>
+                        <Icon name={'ios-arrow-back'} color={'#FFFFFF'} size={30}/>
+                    </View>),
+                headerRight: (
+                    <View style={{marginRight: 20}}>
+                        <Icon name={'ios-search'} color={'#FFFFFF'} size={30}/>
+                    </View>),
             }
         },
         List_Teacher: {
             screen: TeacherListView,
             navigationOptions: {
-                title: 'Teacher List'
+                title: 'Teacher List',
+                headerRight: (
+                    <View style={{marginRight: 20}}>
+                        <Icon name={'ios-search'} color={'#FFFFFF'} size={30}/>
+                    </View>),
             }
         },
         Teacher_Profile: {
@@ -36,15 +53,7 @@ const HomeStack = createStackNavigator(
             },
             headerTitleStyle: {
                 color: ColorTheme.TEXT_COLOR
-            },
-            headerLeft: (
-                <View style={{marginLeft: 20}}>
-                    <Icon name={'ios-arrow-back'} color={'#FFFFFF'} size={30}/>
-                </View>),
-            headerRight: (
-                <View style={{marginRight: 20}}>
-                    <Icon name={'ios-search'} color={'#FFFFFF'} size={30}/>
-                </View>),
+            }
         }
     }
 );

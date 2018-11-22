@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {RecyclerListView, DataProvider, LayoutProvider} from "recyclerlistview";
 import {Constants} from "../../constants";
 import {TeacherService} from "../../services/api/teacherService";
-import TeacherBox from "../darkComponent/teacherBox";
+import TeacherBox from "../sharedComponent/teacherBox";
 
 
 export default class TeacherListView extends Component {

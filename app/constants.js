@@ -8,9 +8,10 @@ export const Constants = {
 }
 
 export const ColorTheme = {
-    BACKGROUND_COLOR: '#1B1A20',
+    BACKGROUND_COLOR: '#19191B',
     TEXT_COLOR: '#FFFFFF',
     IS_ONLINE_COLOR: 'green',
-    BAR_COLOR: '#2F2D3B',
-    ICON_COLOR: '#FFFFFF'
+    BAR_COLOR: '#2B2C33',
+    ICON_COLOR: '#FFFFFF',
+    MESSAGE_BOX_COLOR: '#1986D8',
 }

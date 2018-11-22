@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {RecyclerListView, DataProvider, LayoutProvider} from "recyclerlistview";
-import CategoryBox from "../darkComponent/categoryBox";
+import CategoryBox from "../sharedComponent/categoryBox";
 import {CategoryService} from "../../services/api/categoryService";
 import {Constants} from "../../constants";
 
