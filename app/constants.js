@@ -4,7 +4,8 @@ import {Dimensions} from "react-native";
 export const Constants = {
     SIZE_WINDOW: Dimensions.get('window'),
     VIEW_TYPE_FULL: 1,
-    VIEW_TYPE_HALF: 0
+    VIEW_TYPE_HALF: 0,
+    GOOGLE_API_KEY: 'AIzaSyARzBhXPhu4mvV-gM_2i6JWQvdGMuRkd1s'
 }
 
 export const ColorTheme = {

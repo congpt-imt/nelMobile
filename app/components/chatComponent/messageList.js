@@ -41,7 +41,6 @@ export default class MessageList extends Component {
         const data = this.props.data
         return (
             <FlatList
-                inverted
                 ref={(ref) => this.flatList = ref}
                 data={data}
                 keyExtractor={(item, index) => index}

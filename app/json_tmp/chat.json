@@ -65,6 +65,12 @@
       "image": "https://images.pexels.com/photos/218983/pexels-photo-218983.jpeg",
       "time": "11:01",
       "isCurrentUser": false
+    },
+    {
+      "text": "Có video này bạn coi thử https://www.youtube.com/watch?v=8snnyaj8ofE",
+      "image": "",
+      "time": "11:01",
+      "isCurrentUser": true
     }
   ]
 }

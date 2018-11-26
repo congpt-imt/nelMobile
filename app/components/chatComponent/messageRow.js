@@ -2,30 +2,36 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types'
 import {StyleSheet, View, Text} from 'react-native';
 import AvatarBox from "../sharedComponent/avatarBox";
-import MessageImageRow from "./messageImageRow";
 import {ColorTheme} from "../../constants";
 import * as LinkPreview from "react-native-link-preview";
+import MessageYoutubeRow from "./messageYoutubeRow";
+import MessageImageRow from "./messageImageRow";
+import MessageVideoRow from "./messageVideoRow";
+import {Utils} from "../../utils/utils";
 
 export default class MessageRow extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            link: 'https://stackoverflow.com/questions/52127864/how-to-get-title-from-url-with-react-native-link-preview',
+            message: this.props.message.text,
             dataLink: {
-                url: '',
-                title: '',
-                description: '',
-                images: '',
-                mediaType: '',
-                contentType: '',
-                favicons: ''
+                url: '', title: '', description: '', images: '',
+                mediaType: '', contentType: '', favicons: ''
             }
         }
-
-        LinkPreview.getPreview(this.state.link).then(data => this.setState({dataLink: data}));
     }
+
+    getImageOrVideo() {
+        let url = Utils.regexUrl(this.state.message);
+        let urlImg = Utils.regexImageUrl(this.state.message)
+        LinkPreview.getPreview(url).then(data => this.setState({dataLink: data}));
+    }
+
+    componentWillMount() {
+        this.getImageOrVideo();
+    }
+
     render() {
-        const img = this.props.message.text.match(/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png|jpeg)/g);
         if (this.props.message.isCurrentUser) {
             return (
                 <View style={[styles.container, {alignItems: 'flex-end', marginLeft: 100}]}>
@@ -34,8 +40,8 @@ export default class MessageRow extends Component {
                             <Text style={styles.message_text}>
                                 {this.props.message.text}
                             </Text>
-                            {img ? <MessageImageRow image={img.toString()}/> : null}
-                            {/*{img ? <Text selectable>{this.state.dataLink.images}</Text> : null}*/}
+                            {this.state.dataLink.images !== '' ? <MessageImageRow image={this.state.dataLink.images.toString()}/> : null}
+                            {/*{img ? <MessageYoutubeRow/> : null}*/}
                         </View>
                     </View>
                 </View>
@@ -55,7 +61,7 @@ export default class MessageRow extends Component {
                         <Text style={styles.message_text}>
                             {this.props.message.text}
                         </Text>
-                        {img ? <MessageImageRow image={img.toString()}/> : null}
+                        {this.state.dataLink.images !== '' ? <MessageImageRow image={this.state.dataLink.images.toString()}/> : null}
                     </View>
                 </View>
             </View>
