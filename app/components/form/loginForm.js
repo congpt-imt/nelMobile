@@ -19,9 +19,9 @@ export default class LoginForm extends Component {
                 <View style={styles.btn_Sign_In}>
                     <ButtonCustom onPress={onPress} title={'SIGN IN'}/>
                 </View>
-                <View style={styles.btn_Social}>
-                    <ButtonCustom title={'or Login with Socials'}/>
-                </View>
+                {/*<View style={styles.btn_Social}>*/}
+                    {/*<ButtonCustom title={'or Login with Socials'}/>*/}
+                {/*</View>*/}
                 <View style={styles.btn_Register}>
                     <Text style={{fontSize: RF(2.7), fontFamily: 'System', color: 'white'}}
                           onPress={() => this.props.navigation.navigate('Register')}>Create Account</Text>

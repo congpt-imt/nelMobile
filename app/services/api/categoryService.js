@@ -1,26 +1,22 @@
 import {Constants} from "../../constants";
 
 export class CategoryService {
-    static async getCategories(start, count) {
+    static async getCategories(succeeded, failed) {
         try {
-            let response = await fetch('http://localhost:8080/api/nel-categories', {
+            let response = await fetch('http://192.168.101.186:8080/api/nel-categories', {
                 method: 'GET',
                 headers: {
-                    Authentication: `Bearer ${Constants.TOKEN}`,
+                    Authorization: 'Bearer ' + Constants.TOKEN,
                     Accept: 'application/json',
-                    'Content-Type': 'application/json',
                 }
             });
 
             let categories = await response.json();
-            let fullData = categories.data;
-            let result = fullData.slice(
-                start,
-                Math.min(fullData.length, start + count)
-            );
-            return result;
+            let result = categories.data;
+
+            succeeded(result);
         } catch (error) {
-            console.error(error);
+            failed(error);
         }
     }
 }

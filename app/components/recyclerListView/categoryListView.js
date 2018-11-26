@@ -3,10 +3,12 @@ import {RecyclerListView, DataProvider, LayoutProvider} from "recyclerlistview";
 import CategoryBox from "../sharedComponent/categoryBox";
 import {CategoryService} from "../../services/api/categoryService";
 import {Constants} from "../../constants";
+import {Alert} from "react-native";
+import {Text} from "react-native-elements";
 
 export default class CategoryListView extends Component {
-    constructor(args) {
-        super(args);
+    constructor(props) {
+        super(props);
 
         let layoutProvider = new LayoutProvider(
             index => {
@@ -36,7 +38,6 @@ export default class CategoryListView extends Component {
             dataProvider: new DataProvider((r1, r2) => {
                 return r1 !== r2;
             }),
-            data: [],
             count: 0,
         };
 
@@ -51,14 +52,14 @@ export default class CategoryListView extends Component {
         if (!this.inProgressNetworkReq) {
 
             this.inProgressNetworkReq = true;
-            const data = CategoryService.getCategories(this.state.count, 20);
-            this.inProgressNetworkReq = false;
-            this.setState({
-                dataProvider: this.state.dataProvider.cloneWithRows(
-                    this.state.data.concat(data)
-                ),
-                images: this.state.data.concat(data),
-                count: this.state.count + 20,
+            CategoryService.getCategories((data) => {
+                this.setState({
+                    dataProvider: this.state.dataProvider.cloneWithRows(data),
+                });
+
+                this.inProgressNetworkReq = false;
+            }, (data) => {
+                Alert.alert(data.toString());
             });
         }
     }
@@ -77,8 +78,8 @@ export default class CategoryListView extends Component {
                         return <CategoryBox
                             image={data.image}
                             category_name={data.name}
-                            width={(Constants.SIZE_WINDOW.width - 10) / 2}
-                            height={(Constants.SIZE_WINDOW.width - 10) / 2}
+                            width={(Constants.SIZE_WINDOW.width - 10) / 3}
+                            height={(Constants.SIZE_WINDOW.width - 10) / 3}
                             onPress={onPress}/>;
                         break;
                     case Constants.VIEW_TYPE_FULL:
@@ -92,5 +93,7 @@ export default class CategoryListView extends Component {
                 }
             }}
         />;
+
+        // return <Text>{this.state.data.name}</Text>
     }
 }

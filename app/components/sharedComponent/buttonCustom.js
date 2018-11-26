@@ -22,10 +22,10 @@ export default class ButtonCustom extends Component {
 const styles = StyleSheet.create({
     button: {
         padding: 15,
-        backgroundColor: 'transparent',
-        borderRadius: 1000,
+        backgroundColor: '#2B2C33',
+        borderRadius: 5,
         borderWidth: 0.3,
-        borderColor: '#FFFFFF'
+        borderColor: '#2B2C33'
     },
     buttonText: {
         color: '#FFFFFF',

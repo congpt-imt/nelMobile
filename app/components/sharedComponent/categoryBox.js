@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, TouchableWithoutFeedback, Animated, ImageBackground} from 'react-native';
+import {ColorTheme, Constants} from "../../constants";
 
 export default class CategoryBox extends Component {
     constructor(props) {
@@ -49,12 +50,12 @@ export default class CategoryBox extends Component {
                                 height: height,
                                 alignItems: 'center',
                                 justifyContent: 'flex-end',
-                                margin: 5
+                                margin: 15,
                             }}
                             source={{uri: image}}
                         >
-                            <Text style={styles.text}>{category_name}</Text>
                         </ImageBackground>
+                        <Text style={styles.text}>{category_name}</Text>
                     </Animated.View>
                 </TouchableWithoutFeedback>
             </View>
@@ -69,11 +70,15 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     button: {
-        backgroundColor: 'transparent',
+        backgroundColor: ColorTheme.BAR_COLOR,
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: Constants.SIZE_WINDOW.width / 2 - 5,
+        height: Constants.SIZE_WINDOW.width / 2 - 5
     },
     text: {
         color: '#FFFFFF',
-        fontSize: 20,
+        fontSize: 15,
         marginBottom: 10
     }
 });
