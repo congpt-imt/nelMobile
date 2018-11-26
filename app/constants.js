@@ -6,6 +6,7 @@ export const Constants = {
     VIEW_TYPE_FULL: 1,
     VIEW_TYPE_HALF: 0,
     GOOGLE_API_KEY: 'AIzaSyARzBhXPhu4mvV-gM_2i6JWQvdGMuRkd1s'
+    TOKEN: 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOLFJPTEVfVVNFUiIsImV4cCI6MTU0NTgwMDQzM30.v4fOiNyusAmFHkD-8HgtSA9wRbhhqoZ5zgdsh760wH73O31bgdXZRq_hbj84DdkqIaAZ_N70Si4cNi000cgzEQ'
 }
 
 export const ColorTheme = {
