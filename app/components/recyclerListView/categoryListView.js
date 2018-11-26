@@ -10,9 +10,7 @@ export default class CategoryListView extends Component {
 
         let layoutProvider = new LayoutProvider(
             index => {
-                if (index - 8 === 0) {
-                    return Constants.VIEW_TYPE_FULL;
-                } else {
+                if (index) {
                     return Constants.VIEW_TYPE_HALF;
                 }
             },
