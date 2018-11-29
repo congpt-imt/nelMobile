@@ -1,20 +1,19 @@
-import React, { Component } from "react";
-import { TouchableOpacity, View, Text, StyleSheet } from "react-native";
-import RF from 'react-native-responsive-fontsize';
+import React, {Component} from "react";
+import {TouchableNativeFeedback, View, Text, StyleSheet} from "react-native";
 
 export default class ButtonCustom extends Component {
 
     render() {
-        const { onPress, title } = this.props;
+        const {onPress, title} = this.props;
 
         return (
-            <TouchableOpacity onPress={onPress}>
+            <TouchableNativeFeedback onPress={onPress}>
                 <View style={styles.button}>
                     <Text style={styles.buttonText}>
                         {title}
                     </Text>
                 </View>
-            </TouchableOpacity>
+            </TouchableNativeFeedback>
         );
     }
 }

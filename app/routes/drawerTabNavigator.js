@@ -6,12 +6,18 @@ import ChatStack from "./chatTabNavigator";
 import {View} from "react-native";
 import HeaderBar from "../components/navigator/headerBar";
 import {ColorTheme} from "../constants";
+import DrawerScreen from "../components/navigator/drawerScreen";
 
 const DrawerNavigator = createDrawerNavigator(
     {
         Home: HomeStack,
         Chat: ChatStack,
         Profile: Profile,
+    },
+    {
+        initialRouteName: 'Home',
+        contentComponent: DrawerScreen,
+        drawerWidth: 250,
     }
 );
 

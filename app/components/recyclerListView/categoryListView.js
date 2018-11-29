@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {DataProvider, LayoutProvider, RecyclerListView} from "recyclerlistview";
 import CategoryBox from "../sharedComponent/categoryBox";
 import {CategoryService} from "../../services/api/categoryService";
-import {ColorTheme, Constants} from "../../constants";
+import {Constants} from "../../constants";
 import {Alert} from "react-native";
 
 export default class CategoryListView extends Component {

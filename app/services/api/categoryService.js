@@ -3,7 +3,7 @@ import {Constants} from "../../constants";
 export class CategoryService {
     static async getCategories(succeeded, failed) {
         try {
-            let response = await fetch('http://192.168.101.186:8080/api/nel-categories', {
+            let response = await fetch('http://192.168.137.1:8080/api/nel-categories', {
                 method: 'GET',
                 headers: {
                     Authorization: 'Bearer ' + Constants.TOKEN,
