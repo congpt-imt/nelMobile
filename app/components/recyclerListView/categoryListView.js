@@ -1,10 +1,9 @@
 import React, {Component} from "react";
-import {RecyclerListView, DataProvider, LayoutProvider} from "recyclerlistview";
+import {DataProvider, LayoutProvider, RecyclerListView} from "recyclerlistview";
 import CategoryBox from "../sharedComponent/categoryBox";
 import {CategoryService} from "../../services/api/categoryService";
-import {Constants} from "../../constants";
+import {ColorTheme, Constants} from "../../constants";
 import {Alert} from "react-native";
-import {Text} from "react-native-elements";
 
 export default class CategoryListView extends Component {
     constructor(props) {
@@ -19,8 +18,8 @@ export default class CategoryListView extends Component {
             (type, dim) => {
                 switch (type) {
                     case Constants.VIEW_TYPE_HALF:
-                        dim.width = Constants.SIZE_WINDOW.width / 2;
-                        dim.height = Constants.SIZE_WINDOW.width / 2;
+                        dim.width = Constants.SIZE_WINDOW.width / 2 - 1;
+                        dim.height = Constants.SIZE_WINDOW.width / 2 - 1;
                         break;
                     case Constants.VIEW_TYPE_FULL:
                         dim.width = Constants.SIZE_WINDOW.width;
@@ -69,13 +68,13 @@ export default class CategoryListView extends Component {
 
         return <RecyclerListView
             style={{flex: 1}}
-            // contentContainerStyle={{ margin: 4 }}
             layoutProvider={this.state.layoutProvider}
             dataProvider={this.state.dataProvider}
             rowRenderer={(type, data) => {
                 switch (type) {
                     case Constants.VIEW_TYPE_HALF:
                         return <CategoryBox
+                            category_id={data.id}
                             image={data.image}
                             category_name={data.name}
                             width={(Constants.SIZE_WINDOW.width - 10) / 3}
@@ -84,6 +83,7 @@ export default class CategoryListView extends Component {
                         break;
                     case Constants.VIEW_TYPE_FULL:
                         return <CategoryBox
+                            category_id={data.id}
                             image={data.image}
                             category_name={data.name}
                             width={(Constants.SIZE_WINDOW.width - 5)}
@@ -93,7 +93,5 @@ export default class CategoryListView extends Component {
                 }
             }}
         />;
-
-        // return <Text>{this.state.data.name}</Text>
     }
 }

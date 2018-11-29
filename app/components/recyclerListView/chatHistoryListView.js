@@ -17,7 +17,7 @@ export default class ChatHistoryListView extends Component {
             (type, dim) => {
                 if (type === Constants.VIEW_TYPE_FULL) {
                     dim.width = Constants.SIZE_WINDOW.width;
-                    dim.height = Constants.SIZE_WINDOW.height / 5.5;
+                    dim.height = 95;
                 } else {
                     dim.width = 0;
                     dim.height = 0;

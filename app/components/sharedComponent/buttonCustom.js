@@ -21,7 +21,7 @@ export default class ButtonCustom extends Component {
 
 const styles = StyleSheet.create({
     button: {
-        padding: 15,
+        padding: 12,
         backgroundColor: '#2B2C33',
         borderRadius: 5,
         borderWidth: 0.3,
@@ -30,6 +30,6 @@ const styles = StyleSheet.create({
     buttonText: {
         color: '#FFFFFF',
         textAlign: 'center',
-        fontSize: RF(3.2),
+        fontSize: 16,
     },
 })

@@ -3,7 +3,7 @@ import {View} from 'react-native';
 import CategoryListView from '../../components/recyclerListView/categoryListView';
 import {generalStyle} from "../../resources/stylesheet/stylesheet";
 
-export default class Home extends Component {
+export default class Category extends Component {
 
     render() {
         return (

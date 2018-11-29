@@ -1,8 +1,10 @@
 import React, {Component} from "react";
-import {RecyclerListView, DataProvider, LayoutProvider} from "recyclerlistview";
+import {DataProvider, LayoutProvider, RecyclerListView} from "recyclerlistview";
 import {Constants} from "../../constants";
 import {TeacherService} from "../../services/api/teacherService";
 import TeacherBox from "../sharedComponent/teacherBox";
+import {Alert} from "react-native";
+import {Text} from "react-native-elements";
 
 
 export default class TeacherListView extends Component {
@@ -19,7 +21,7 @@ export default class TeacherListView extends Component {
                 switch (type) {
                     case Constants.VIEW_TYPE_FULL:
                         dim.width = Constants.SIZE_WINDOW.width;
-                        dim.height = Constants.SIZE_WINDOW.height / 5;
+                        dim.height = 100;
                         break;
                     default:
                         dim.width = 0;
@@ -33,8 +35,6 @@ export default class TeacherListView extends Component {
             dataProvider: new DataProvider((r1, r2) => {
                 return r1 !== r2;
             }),
-            data: [],
-            count: 0,
         };
 
         this.inProgressNetworkReq = false;
@@ -44,34 +44,45 @@ export default class TeacherListView extends Component {
         this.fetchMoreData();
     }
 
+    componentWillReceiveProps = nextProps => {
+        alert(JSON.stringify(nextProps));
+    }
+
     fetchMoreData() {
         if (!this.inProgressNetworkReq) {
 
             this.inProgressNetworkReq = true;
-            const data = TeacherService.getTeachers(this.state.count, 20);
-            this.inProgressNetworkReq = false;
-            this.setState({
-                dataProvider: this.state.dataProvider.cloneWithRows(
-                    this.state.data.concat(data)
-                ),
-                images: this.state.data.concat(data),
-                count: this.state.count + 20,
+            TeacherService.getTeachers((data) => {
+                this.setState({
+                    dataProvider: this.state.dataProvider.cloneWithRows(data),
+                });
+                // alert(JSON.stringify(data[0].nelUserInformationDTO.nelRatingDTO));
+                this.inProgressNetworkReq = false;
+            }, (data) => {
+                alert(JSON.stringify(data));
             });
         }
     }
 
     render() {
+
         return <RecyclerListView
             style={{flex: 1}}
             layoutProvider={this.state.layoutProvider}
             dataProvider={this.state.dataProvider}
             rowRenderer={(type, data) => {
-                return <TeacherBox
-                        image={data.image}
-                        teacher_name={data.name}
-                        description={data.describe}
-                        onPress={() => this.props.navigation.navigate('Teacher_Profile')}
-                    />
+                // const {nelUserInformationDTO: {nelRatingDTO: {rate}}} = data
+                if (data !== undefined) {
+                    alert(JSON.stringify(data));
+                }
+
+                // return <TeacherBox
+                //         image={data.image}
+                //         teacher_name={data.username}
+                //         nelProfile={data.nelProfile}
+                //         stars={data.nelUserInformationDTO.nelRatingDTO.id}
+                //         onPress={() => this.props.navigation.navigate('Teacher_Profile')}
+                //     />
             }}
         />;
     }

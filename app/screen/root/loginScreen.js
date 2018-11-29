@@ -10,16 +10,15 @@ export default class LoginScreen extends Component {
             <KeyboardAvoidingView style={styles.container}>
                 <View style={styles.logo_container}>
                     <Image
-                        style={{
-                            width: Constants.SIZE_WINDOW.width * 0.8,
-                            height: Constants.SIZE_WINDOW.height * 0.15
-                        }}
+                        style={{width: 300, height: 90}}
                         source={require('../../resources/images/logo.png')}
                     />
                 </View>
 
                 <View style={styles.container}>
-                    <LoginForm onPress={() => this.props.navigation.navigate('TabBar')}/>
+                    <LoginForm
+                        onPressSignIn={() => this.props.navigation.navigate('Drawer')}
+                        onPressRegister={() => this.props.navigation.navigate('Register')}/>
                 </View>
             </KeyboardAvoidingView>
         );
@@ -32,7 +31,7 @@ const styles = StyleSheet.create({
         backgroundColor: ColorTheme.BACKGROUND_COLOR,
     },
     logo_container: {
-        flex: 17/20,
+        flex: 17 / 20,
         justifyContent: 'center',
         alignItems: 'center',
     },

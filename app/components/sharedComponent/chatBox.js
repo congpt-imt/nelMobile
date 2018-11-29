@@ -19,7 +19,7 @@ export default class ChatBox extends Component {
                         <View style={styles.image_teacher}>
                             <AvatarBox
                                 image={"https://images.pexels.com/photos/719609/pexels-photo-719609.jpeg"}
-                                sizeAvatar={70}
+                                sizeAvatar={60}
                                 sizeIsOnline={15}
                             />
                         </View>

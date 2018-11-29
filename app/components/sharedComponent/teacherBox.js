@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, TouchableWithoutFeedback, View, Image, Text} from 'react-native';
+import {StyleSheet, Text, TouchableWithoutFeedback, View} from 'react-native';
 import StarRating from 'react-native-star-rating';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AvatarBox from "./avatarBox";
@@ -8,9 +8,6 @@ import {ColorTheme} from "../../constants";
 export default class TeacherBox extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            starCount: 3.7
-        };
     }
 
     trunc(text) {
@@ -18,9 +15,7 @@ export default class TeacherBox extends Component {
     }
 
     render() {
-        const {description, teacher_name, image, onPress} = this.props;
-        const text = 'Là một kỹ sư phần mềm tại công ty IMT Solutions từ năm 2017. Đã có hơn 1 năm kinh nghiệm trong lĩnh vực lập trình';
-
+        const {nelProfile, teacher_name, image, stars, onPress} = this.props;
         return (
             <View style={styles.container_fluid}>
                 <TouchableWithoutFeedback onPress={onPress}>
@@ -28,7 +23,7 @@ export default class TeacherBox extends Component {
                         <View style={styles.image_teacher}>
                             <AvatarBox
                                 image={image}
-                                sizeAvatar={90}
+                                sizeAvatar={70}
                                 sizeIsOnline={15}
                             />
                         </View>
@@ -45,13 +40,13 @@ export default class TeacherBox extends Component {
                                     halfStar={'ios-star-half'}
                                     iconSet={'Ionicons'}
                                     maxStars={5}
-                                    starSize={20}
-                                    rating={this.state.starCount}
+                                    starSize={18}
+                                    rating={5}
                                     fullStarColor={'yellow'}
                                 />
                             </View>
                             <View style={styles.describe}>
-                                <Text style={styles.text_describe}>{this.trunc(text)}</Text>
+                                <Text style={styles.text_describe}>{this.trunc(nelProfile.toString())}</Text>
                             </View>
                         </View>
                     </View>

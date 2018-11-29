@@ -73,8 +73,8 @@ const styles = StyleSheet.create({
         backgroundColor: ColorTheme.BAR_COLOR,
         justifyContent: 'center',
         alignItems: 'center',
-        width: Constants.SIZE_WINDOW.width / 2 - 5,
-        height: Constants.SIZE_WINDOW.width / 2 - 5
+        width: Constants.SIZE_WINDOW.width / 2 - 10,
+        height: Constants.SIZE_WINDOW.width / 2 - 10
     },
     text: {
         color: '#FFFFFF',

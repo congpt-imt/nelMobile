@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     message_form: {
-        height: 60,
+        height: Constants.HEIGHT_BAR,
         flexDirection: 'row',
         backgroundColor: ColorTheme.BAR_COLOR,
         borderTopWidth: 2,
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     text_input: {
-        height: Constants.SIZE_WINDOW.height/14,
+        height: Constants.HEIGHT_BAR - 4,
         width: Constants.SIZE_WINDOW.width/1.2,
         borderColor: 'gray',
         borderWidth: 1,

@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, Image, Text, ImageBackground, ScrollView} from 'react-native';
+import {StyleSheet, View, Image, Text} from 'react-native';
 import DarkTextInput from '../sharedComponent/darkTextInput';
 import ButtonCustom from '../sharedComponent/buttonCustom';
-import RF from 'react-native-responsive-fontsize';
+import {Constants} from "../../constants";
 
 export default class LoginForm extends Component {
     render() {
-        const {onPress} = this.props;
+        const {onPressSignIn, onPressRegister} = this.props;
         return (
             <View style={{flex: 1}}>
                 <View style={styles.input_form}>
@@ -17,14 +17,17 @@ export default class LoginForm extends Component {
                 </View>
 
                 <View style={styles.btn_Sign_In}>
-                    <ButtonCustom onPress={onPress} title={'SIGN IN'}/>
+                    <ButtonCustom onPress={onPressSignIn} title={'SIGN IN'}/>
                 </View>
-                {/*<View style={styles.btn_Social}>*/}
-                    {/*<ButtonCustom title={'or Login with Socials'}/>*/}
-                {/*</View>*/}
+                <View style={styles.social_container}>
+                    <Image style={styles.btn_Social} source={require('../../resources/icon/facebook.png')}/>
+                    <Image style={styles.btn_Social} source={require('../../resources/icon/twitter.png')}/>
+                    <Image style={styles.btn_Social} source={require('../../resources/icon/google-plus.png')}/>
+                    <Image style={styles.btn_Social} source={require('../../resources/icon/line.png')}/>
+                </View>
                 <View style={styles.btn_Register}>
-                    <Text style={{fontSize: RF(2.7), fontFamily: 'System', color: 'white'}}
-                          onPress={() => this.props.navigation.navigate('Register')}>Create Account</Text>
+                    <Text style={{fontSize: 14, fontFamily: 'System', color: 'white'}}
+                          onPress={onPressRegister}>Create Account</Text>
                 </View>
             </View>
         );
@@ -39,13 +42,22 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     btn_Sign_In: {
-        height: 50,
+        height: 40,
         margin: 10,
-        marginTop: 30
+        marginTop: 20
+    },
+    social_container: {
+        margin: Constants.SIZE_WINDOW.height / 36,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     btn_Social: {
-        height: 50,
+        width: 40,
+        height: 40,
         margin: 10,
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     btn_Register: {
         marginBottom: 5,
