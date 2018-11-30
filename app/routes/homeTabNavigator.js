@@ -1,17 +1,18 @@
 import React from "react";
 import {createStackNavigator} from 'react-navigation';
-import Category from '../screen/home/categoryScreen';
+import CategoryList from '../screen/home/categoryListScreen';
 import TeacherProfile from "../screen/profile/teacherProfileScreen";
 import TeacherList from "../screen/home/teacherListScreen";
 import {ColorTheme} from "../constants";
 
 const HomeStack = createStackNavigator(
     {
-        Home:  Category,
-        List_Teacher:  TeacherList,
-        Teacher_Profile: TeacherProfile,
+        Home:  CategoryList,
+        TeacherList:  TeacherList,
+        TeacherProfile: TeacherProfile,
     },
     {
+        initialRouteName: 'Home',
         headerMode: 'none',
         mode: 'card',
         cardStyle: { backgroundColor: ColorTheme.BACKGROUND_COLOR },

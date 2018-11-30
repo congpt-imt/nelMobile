@@ -76,13 +76,13 @@ export default class TeacherListView extends Component {
                     alert(JSON.stringify(data));
                 }
 
-                // return <TeacherBox
-                //         image={data.image}
-                //         teacher_name={data.username}
-                //         nelProfile={data.nelProfile}
-                //         stars={data.nelUserInformationDTO.nelRatingDTO.id}
-                //         onPress={() => this.props.navigation.navigate('Teacher_Profile')}
-                //     />
+                return <TeacherBox
+                        image={data.image}
+                        teacher_name={data.username}
+                        nelProfile={data.nelProfile}
+                        // stars={data.nelUserInformationDTO.nelRatingDTO.id}
+                        onPress={() => this.props.navigation.navigate('TeacherProfile')}
+                    />
             }}
         />;
     }

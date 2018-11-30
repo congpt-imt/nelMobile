@@ -7,7 +7,8 @@ export default class ButtonCustom extends Component {
         const {onPress, title} = this.props;
 
         return (
-            <TouchableNativeFeedback onPress={onPress}>
+            <TouchableNativeFeedback onPress={onPress} useForeground={true}
+                                     background={TouchableNativeFeedback.Ripple('rgba(240, 240, 240, 0.3)', false)}>
                 <View style={styles.button}>
                     <Text style={styles.buttonText}>
                         {title}

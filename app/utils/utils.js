@@ -1,4 +1,8 @@
 export class Utils {
+    static truncate(text, length) {
+        return text.length > length ? `${text.substr(0, length)}...` : text;
+    }
+
     static regexUrl(str) {
         const url = str.match(/((http(s)?(\:\/\/))+(www\.)?([\w\-\.\/])*(\.[a-zA-Z]{2,3}\/?))[^\s\b\n|]*[^.,;:\?\!\@\^\$ -]/g);
         return url;

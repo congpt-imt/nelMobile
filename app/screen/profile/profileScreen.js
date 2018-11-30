@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
+import {ColorTheme} from "../../constants";
 
 export default class Profile extends Component {
     render() {
@@ -15,7 +16,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'row',
-        backgroundColor: '#1B1A20',
+        backgroundColor: ColorTheme.BACKGROUND_COLOR,
     },
     category_box: {
         flex: 1,

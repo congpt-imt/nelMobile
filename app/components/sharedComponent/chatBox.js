@@ -1,40 +1,46 @@
 import React, {Component} from 'react';
-import {StyleSheet, TouchableWithoutFeedback, View, Text} from 'react-native';
+import {StyleSheet, Text, TouchableHighlight, TouchableNativeFeedback, View} from 'react-native';
 import AvatarBox from "./avatarBox";
 import {generalStyle} from "../../resources/stylesheet/stylesheet";
+import {Utils} from "../../utils/utils";
 
 export default class ChatBox extends Component {
-    trunc(text) {
-        return text.length > 40 ? `${text.substr(0, 40)}...` : text;
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            backgroundColor: 'transparent'
+        }
     }
 
     render() {
-        const {onPress} = this.props;
-        const text = 'Chào bạn, rất vui được gặp bạn';
+        const {onPress, image, name} = this.props;
+        const text = 'Chào bạn, rất vui được gặp bạn trong buổi sáng hôm nay';
 
         return (
-            <View style={styles.container_fluid}>
-                <TouchableWithoutFeedback onPress={onPress}>
+            <View style={styles.container}>
+                <TouchableNativeFeedback onPress={onPress} useForeground={true} background={TouchableNativeFeedback.Ripple('rgba(240, 240, 240, 0.1)', false)}>
                     <View style={generalStyle.container_row}>
                         <View style={styles.image_teacher}>
                             <AvatarBox
-                                image={"https://images.pexels.com/photos/719609/pexels-photo-719609.jpeg"}
-                                sizeAvatar={60}
-                                sizeIsOnline={15}
+                                image={image}
+                                sizeAvatar={45}
+                                sizeIsOnline={10}
                             />
                         </View>
 
                         <View style={styles.chat_box}>
                             <View style={styles.teacher_name}>
-                                <Text style={styles.text_name}>Hoàng Văn Bình</Text>
+                                <Text style={styles.text_name}>{Utils.truncate(name, 15)}</Text>
+                                <Text style={styles.last_date_chat}>29/11/2018</Text>
                             </View>
                             <View style={styles.chat_text}>
-                                <Text style={styles.last_text_chat}>{this.trunc(text)}</Text>
+                                <Text style={styles.last_text_chat}>{Utils.truncate(text, 33)}</Text>
                                 <Text style={styles.last_hour_chat}>11:20</Text>
                             </View>
                         </View>
                     </View>
-                </TouchableWithoutFeedback>
+                </TouchableNativeFeedback>
             </View>
         );
     }
@@ -42,48 +48,59 @@ export default class ChatBox extends Component {
 }
 
 const styles = StyleSheet.create({
-    container_fluid: {
+    container: {
         flex: 1,
-        justifyContent:'center',
-        alignItems: 'center',
     },
     image_teacher: {
-        flex: 2.5 / 10,
+        flex: 2 / 10,
         backgroundColor: 'transparent',
-        height: '100%',
-        justifyContent:'center',
+        justifyContent: 'center',
         alignItems: 'center'
     },
     chat_box: {
-        flex: 7.5 / 10,
+        flex: 8 / 10,
         backgroundColor: 'transparent',
-        height: '100%',
         marginLeft: 6,
     },
     teacher_name: {
-        flex: 2,
-        justifyContent: 'center',
+        flex: 1,
+        marginRight: 4,
+        marginTop: 20,
+        flexDirection: 'row',
+        // borderWidth: 1,
+        // borderColor: 'green'
     },
     text_name: {
+        flex: 7 / 10,
         fontSize: 17,
         color: '#FFFFFF'
     },
+    last_date_chat: {
+        flex: 3 / 10,
+        marginTop: 3,
+        fontSize: 13,
+        color: '#C1C1C1',
+        textAlign: 'right',
+    },
     chat_text: {
-        flex: 1.5,
+        flex: 1,
         marginRight: 4,
+        marginBottom: 10,
         flexDirection: 'row',
+        // borderWidth: 1,
+        // borderColor: 'yellow'
     },
     last_text_chat: {
-        flex: 8/10,
+        flex: 8 / 10,
         fontSize: 14,
         color: '#C1C1C1',
         fontStyle: 'italic',
-        justifyContent: 'flex-start',
     },
     last_hour_chat: {
-        flex: 2/10,
-        fontSize: 14,
-        color: '#FFFFFF',
+        flex: 2 / 10,
+        marginTop: 1,
+        fontSize: 13,
+        color: '#C1C1C1',
         textAlign: 'right',
     }
 });

@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import { RecyclerListView, DataProvider, LayoutProvider } from "recyclerlistview";
-import { Constants } from "../../constants";
-import { TeacherService } from "../../services/api/teacherService";
+import React, {Component} from "react";
+import {DataProvider, LayoutProvider, RecyclerListView} from "recyclerlistview";
+import {Constants} from "../../constants";
 import ChatBox from "../sharedComponent/chatBox";
+import {ChatService} from "../../services/api/chatService";
 
 export default class ChatHistoryListView extends Component {
     constructor(args) {
@@ -45,7 +45,7 @@ export default class ChatHistoryListView extends Component {
         if (!this.inProgressNetworkReq) {
 
             this.inProgressNetworkReq = true;
-            const data = TeacherService.getTeachers(this.state.count, 20);
+            const data = ChatService.getChatHistory(this.state.count, 20);
             this.inProgressNetworkReq = false;
             this.setState({
                 dataProvider: this.state.dataProvider.cloneWithRows(
@@ -58,14 +58,18 @@ export default class ChatHistoryListView extends Component {
     }
 
     render() {
-        const { onPress } = this.props;
+        const {onPress} = this.props;
 
         return <RecyclerListView
-            style={{ flex: 1 }}
+            style={{flex: 1}}
             layoutProvider={this.state.layoutProvider}
             dataProvider={this.state.dataProvider}
             rowRenderer={(type, data) => {
-                return <ChatBox onPress={() => this.props.navigation.navigate('Chat')}/>
+                return <ChatBox
+                    onPress={onPress}
+                    image={data.image}
+                    name={data.name}
+                />
             }}
         />;
     }

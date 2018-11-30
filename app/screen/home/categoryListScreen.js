@@ -3,12 +3,12 @@ import {View} from 'react-native';
 import CategoryListView from '../../components/recyclerListView/categoryListView';
 import {generalStyle} from "../../resources/stylesheet/stylesheet";
 
-export default class Category extends Component {
+export default class CategoryList extends Component {
 
     render() {
         return (
             <View style={generalStyle.container}>
-                <CategoryListView onPress={() => this.props.navigation.navigate('List_Teacher')}/>
+                <CategoryListView onPress={() => this.props.navigation.navigate('TeacherList')}/>
             </View>
         )
     }

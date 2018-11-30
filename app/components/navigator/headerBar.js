@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {StyleSheet, TextInput, TouchableWithoutFeedback, View} from 'react-native'
 import {ColorTheme, Constants} from "../../constants";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import Entypo from "react-native-vector-icons/Entypo";
 
 export default class HeaderBar extends Component {
     render() {
@@ -29,8 +30,8 @@ export default class HeaderBar extends Component {
                 </View>
 
                 <View style={styles.directional}>
-                    <FontAwesome5 name={'home'} size={24} color={'#fff'} style={styles.icon}/>
-                    <FontAwesome5 name={'users'} size={24} color={'#fff'} style={styles.icon}/>
+                    <FontAwesome5 name={'home'} size={24} color={'#fff'} style={styles.icon_home}/>
+                    <Entypo name={'chat'} size={24} color={'#fff'} style={styles.icon_bell}/>
                     <FontAwesome5 name={'bell'} size={24} color={'#fff'} style={styles.icon_bell}/>
                 </View>
             </View>
@@ -81,7 +82,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
     },
-    icon: {
+    icon_home: {
         flex: 1,
         marginTop: 15,
     },
