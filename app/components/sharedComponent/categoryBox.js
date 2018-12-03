@@ -50,7 +50,7 @@ export default class CategoryBox extends Component {
                                 height: height,
                                 alignItems: 'center',
                                 justifyContent: 'flex-end',
-                                margin: 15,
+                                margin: 15
                             }}
                             source={{uri: image}}
                         >
@@ -73,8 +73,7 @@ const styles = StyleSheet.create({
         backgroundColor: ColorTheme.BAR_COLOR,
         justifyContent: 'center',
         alignItems: 'center',
-        width: Constants.SIZE_WINDOW.width / 2 - 10,
-        height: Constants.SIZE_WINDOW.width / 2 - 10
+        width: Constants.SIZE_WINDOW.width / 2 - 5, height: Constants.SIZE_WINDOW.width / 2 - 5
     },
     text: {
         color: '#FFFFFF',

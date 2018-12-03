@@ -8,7 +8,7 @@ export default class ButtonCustom extends Component {
 
         return (
             <TouchableNativeFeedback onPress={onPress} useForeground={true}
-                                     background={TouchableNativeFeedback.Ripple('rgba(240, 240, 240, 0.3)', false)}>
+                                     background={TouchableNativeFeedback.Ripple('rgba(240, 240, 240, 0.1)', false)}>
                 <View style={styles.button}>
                     <Text style={styles.buttonText}>
                         {title}
@@ -23,7 +23,6 @@ const styles = StyleSheet.create({
     button: {
         padding: 12,
         backgroundColor: '#2B2C33',
-        borderRadius: 5,
         borderWidth: 0.3,
         borderColor: '#2B2C33'
     },

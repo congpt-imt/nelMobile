@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {TextInput} from 'react-native';
 import PropTypes from "prop-types";
 
-export default class DarkTextInput extends Component {
+export default class TextInputCustom extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -21,7 +21,7 @@ export default class DarkTextInput extends Component {
     }
 
     render() {
-        if (this.state.input_type === 'Password') {
+        if (this.state.input_type === 'Password' || this.state.input_type === 'Confirm Password') {
             return (
                 <TextInput
                     value={this.state.text}
@@ -30,6 +30,7 @@ export default class DarkTextInput extends Component {
                     placeholderTextColor={'gray'}
                     onFocus={this._onFocus.bind(this)}
                     onBlur={this._onBlur.bind(this)}
+                    secureTextEntry={true}
                     style={{
                         borderBottomWidth: this.state.borderBottomWidth,
                         borderBottomColor: '#FFFFFF',
@@ -58,6 +59,6 @@ export default class DarkTextInput extends Component {
     }
 }
 
-DarkTextInput.propTypes = {
+TextInputCustom.propTypes = {
     input_type: PropTypes.string
 }

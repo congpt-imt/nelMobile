@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {View} from 'react-native';
-import CategoryListView from '../../components/recyclerListView/categoryListView';
+import CategoryListView from '../../components/listView/categoryListView';
 import {generalStyle} from "../../resources/stylesheet/stylesheet";
 
 export default class CategoryList extends Component {

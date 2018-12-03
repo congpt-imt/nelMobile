@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {View} from 'react-native';
 import {generalStyle} from "../../resources/stylesheet/stylesheet";
-import TeacherListView from "../../components/recyclerListView/teacherListView";
+import TeacherListView from "../../components/listView/teacherListView";
 
 export default class TeacherList extends Component {
 

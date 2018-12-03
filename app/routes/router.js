@@ -1,5 +1,5 @@
-import LoginScreen from '../screen/root/loginScreen';
-import RegisterScreen from '../screen/root/registerScreen';
+import Login from '../screen/root/loginScreen';
+import Register from '../screen/root/registerScreen';
 import DrawerTabNavigator from './drawerTabNavigator';
 import {StackNavigator} from 'react-navigation';
 import React from "react";
@@ -7,8 +7,8 @@ import {ColorTheme} from "../constants";
 
 const Router = StackNavigator(
     {
-        Login: LoginScreen,
-        Register: RegisterScreen,
+        Login: Login,
+        Register: Register,
         Drawer: DrawerTabNavigator
     },
     {

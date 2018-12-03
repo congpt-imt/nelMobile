@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, Image, KeyboardAvoidingView} from 'react-native';
-import {ColorTheme, Constants} from "../../constants";
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view'
+import {Image, KeyboardAvoidingView, StyleSheet, View} from 'react-native';
+import {ColorTheme} from "../../constants";
 import LoginForm from "../../components/form/loginForm";
 
-export default class LoginScreen extends Component {
+export default class Login extends Component {
     render() {
         return (
             <KeyboardAvoidingView style={styles.container}>
@@ -31,7 +30,7 @@ const styles = StyleSheet.create({
         backgroundColor: ColorTheme.BACKGROUND_COLOR,
     },
     logo_container: {
-        flex: 17 / 20,
+        flex: 15 / 20,
         justifyContent: 'center',
         alignItems: 'center',
     },
