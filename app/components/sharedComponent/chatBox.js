@@ -1,17 +1,10 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, TouchableHighlight, TouchableNativeFeedback, View} from 'react-native';
+import {StyleSheet, Text, TouchableNativeFeedback, View} from 'react-native';
 import AvatarBox from "./avatarBox";
 import {generalStyle} from "../../resources/stylesheet/stylesheet";
 import {Utils} from "../../utils/utils";
 
 export default class ChatBox extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            backgroundColor: 'transparent'
-        }
-    }
 
     render() {
         const {onPress, image, name} = this.props;
@@ -19,7 +12,8 @@ export default class ChatBox extends Component {
 
         return (
             <View style={styles.container}>
-                <TouchableNativeFeedback onPress={onPress} useForeground={true} background={TouchableNativeFeedback.Ripple('rgba(240, 240, 240, 0.1)', false)}>
+                <TouchableNativeFeedback onPress={onPress} useForeground={true}
+                                         background={TouchableNativeFeedback.Ripple('rgba(240, 240, 240, 0.1)', false)}>
                     <View style={generalStyle.container_row}>
                         <View style={styles.image_teacher}>
                             <AvatarBox
@@ -67,8 +61,6 @@ const styles = StyleSheet.create({
         marginRight: 4,
         marginTop: 20,
         flexDirection: 'row',
-        // borderWidth: 1,
-        // borderColor: 'green'
     },
     text_name: {
         flex: 7 / 10,
@@ -87,8 +79,6 @@ const styles = StyleSheet.create({
         marginRight: 4,
         marginBottom: 10,
         flexDirection: 'row',
-        // borderWidth: 1,
-        // borderColor: 'yellow'
     },
     last_text_chat: {
         flex: 8 / 10,

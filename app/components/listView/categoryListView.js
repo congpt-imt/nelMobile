@@ -59,6 +59,5 @@ export default class CategoryListView extends Component {
                 )}
             />
         );
-
     }
 }

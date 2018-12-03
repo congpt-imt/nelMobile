@@ -4,6 +4,7 @@ import {ColorTheme} from "../../constants";
 import RegisterForm from "../../components/form/registerForm";
 
 export default class Register extends Component {
+
     render() {
         return (
             <KeyboardAvoidingView style={styles.container}>
@@ -15,7 +16,9 @@ export default class Register extends Component {
                 </View>
 
                 <View style={styles.container}>
-                    <RegisterForm onPressSignUp={() => this.props.navigation.navigate('Drawer')}/>
+                    <RegisterForm
+                        onPressSignUp={() => this.props.navigation.navigate('Drawer')}
+                        goBack={() => this.props.navigation.navigate('Login')}/>
                 </View>
             </KeyboardAvoidingView>
         );
@@ -28,7 +31,7 @@ const styles = StyleSheet.create({
         backgroundColor: ColorTheme.BACKGROUND_COLOR,
     },
     logo_container: {
-        flex: 9 / 20,
+        flex: 8 / 20,
         justifyContent: 'center',
         alignItems: 'center',
     },

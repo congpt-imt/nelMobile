@@ -4,18 +4,12 @@ import StarRating from 'react-native-star-rating';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AvatarBox from "./avatarBox";
 import {ColorTheme} from "../../constants";
+import {Utils} from "../../utils/utils";
 
 export default class TeacherBox extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-    trunc(text) {
-        return text.length > 60 ? `${text.substr(0, 60)}...` : text;
-    }
 
     render() {
-        const {nelProfile, teacher_name, image, stars, onPress} = this.props;
+        const {description, teacher_name, image, stars, onPress} = this.props;
         return (
             <View style={styles.container_fluid}>
                 <TouchableWithoutFeedback onPress={onPress}>
@@ -41,12 +35,12 @@ export default class TeacherBox extends Component {
                                     iconSet={'Ionicons'}
                                     maxStars={5}
                                     starSize={18}
-                                    rating={5}
+                                    rating={stars}
                                     fullStarColor={'yellow'}
                                 />
                             </View>
                             <View style={styles.describe}>
-                                <Text style={styles.text_describe}>{this.trunc(nelProfile.toString())}</Text>
+                                <Text style={styles.text_describe}>{Utils.truncate(description, 60)}</Text>
                             </View>
                         </View>
                     </View>
@@ -82,12 +76,6 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         marginLeft: 6,
     },
-    // profileImg: {
-    //     height: 90,
-    //     width: 90,
-    //     borderRadius: 50,
-    //     overflow: 'hidden'
-    // },
     teacher_name: {
         flex: 1,
         fontSize: 20,

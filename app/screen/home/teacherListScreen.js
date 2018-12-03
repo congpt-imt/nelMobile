@@ -8,7 +8,7 @@ export default class TeacherList extends Component {
     render() {
         return (
             <View style={generalStyle.container}>
-                <TeacherListView />
+                <TeacherListView onPress={() => this.props.navigation.navigate('TeacherProfile')}/>
             </View>
         )
     }

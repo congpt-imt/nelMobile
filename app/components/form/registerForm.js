@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import TextInputCustom from '../sharedComponent/textInputCustom';
 import ButtonCustom from '../sharedComponent/buttonCustom';
+import {Constants} from "../../constants";
 
 export default class RegisterForm extends Component {
     constructor() {
@@ -13,7 +14,7 @@ export default class RegisterForm extends Component {
     }
 
     render() {
-        const {onPressSignUp} = this.props;
+        const {onPressSignUp, goBack} = this.props;
         return (
             <View style={{flex: 1}}>
                 <View style={styles.input_form}>
@@ -35,7 +36,8 @@ export default class RegisterForm extends Component {
                 </View>
 
                 <View style={styles.btn_Register}>
-                    <ButtonCustom onPress={onPressSignUp} title={'SIGN UP'}/>
+                    <ButtonCustom onPress={onPressSignUp} title={'SIGN UP'} margin={5} width={Constants.SIZE_WINDOW.width/2 -20}/>
+                    <ButtonCustom onPress={goBack} title={'CANCEL'} margin={5} width={Constants.SIZE_WINDOW.width/2 -20}/>
                 </View>
 
             </View>
@@ -51,9 +53,10 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     btn_Register: {
-        height: 40,
+        flexDirection: 'row',
+        // height: 40,
         margin: 10,
-        marginTop: 20
+        marginTop: 15
     },
     Rule: {
         margin: 15,
