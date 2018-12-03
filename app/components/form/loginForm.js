@@ -1,23 +1,113 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, Image, Text} from 'react-native';
+import {StyleSheet, View, Image, Text, TextInput, Alert} from 'react-native';
 import DarkTextInput from '../sharedComponent/darkTextInput';
 import ButtonCustom from '../sharedComponent/buttonCustom';
 import {Constants} from "../../constants";
+import {UserService} from "../../services/api/userService";
 
 export default class LoginForm extends Component {
+    constructor(props) {
+        super(props);        
+        this.state = {
+            borderBotWidth: 0.3,
+            typedUsername:'',
+            typedPassword:''
+            
+        };
+        this.inProgressNetworkReq = false;
+    }
+    // componentDidMount() {
+    //     this.fetchMoreData();
+    // }
+
+    // fetchMoreData() {
+    //     if (!this.inProgressNetworkReq) {
+
+    //         this.inProgressNetworkReq = true;
+    //         UserService.getUsers((data) => {
+    //             this.setState({
+    //                 dataProvider: this.state.dataProvider.cloneWithRows(data),
+    //             });
+
+    //             this.inProgressNetworkReq = false;
+    //         }, (data) => {
+    //             Alert.alert(data.toString());
+    //         });
+    //     }
+    // }
+
+    _onFocus = () => {
+        this.setState({borderBotWidth: 1.5})
+    }
+
+    _onBlur = () => {
+        this.setState({borderBotWidth: 0.3})
+    }
+
     render() {
         const {onPressSignIn, onPressRegister} = this.props;
         return (
             <View style={{flex: 1}}>
+                
                 <View style={styles.input_form}>
-                    <DarkTextInput input_type={'User name'}/>
+                    <TextInput style={{
+                                borderBottomWidth: this.state.borderBotWidth,
+                                borderBottomColor: '#FFFFFF',
+                                color: '#FFFFFF',
+                                fontSize: 15,
+                                }}
+                                placeholder='Username'
+                                placeholderTextColor='gray'
+                                onFocus={this._onFocus.bind(this)}
+                                onBlur={this._onBlur.bind(this)}
+                                onChangeText={(text)=>{this.setState(()=>{
+                                    return{
+                                      typedUsername: text
+                                    };
+                                })}}
+                    />
                 </View>
                 <View style={styles.input_form}>
-                    <DarkTextInput input_type={'Password'}/>
+                    <TextInput style={{
+                                borderBottomWidth: this.state.borderBotWidth,
+                                borderBottomColor: '#FFFFFF',
+                                color: '#FFFFFF',
+                                fontSize: 15,
+                                }}
+                                placeholder='Password'
+                                placeholderTextColor='gray'
+                                onFocus={this._onFocus.bind(this)}
+                                onBlur={this._onBlur.bind(this)}
+                                secureTextEntry={true} 
+                                onChangeText={(text)=>{this.setState(()=>{
+                                    return{
+                                      typedPassword: text
+                                    };
+                                })}}                                
+                    />
                 </View>
+                <Text style={{color: 'white'}}> {this.state.typedPassword}</Text>
 
                 <View style={styles.btn_Sign_In}>
-                    <ButtonCustom onPress={onPressSignIn} title={'SIGN IN'}/>
+                    <ButtonCustom onPress={()=>{
+                        if (this.state.typedUsername.length == 0 || this.state.typedPassword.length == 0){
+                            Alert.alert("Error","Please enter your username and password")
+                        }
+                        
+                        const params = {
+                            "email": this.state.typedUsername,
+                            "password": this.state.typedPassword
+                        }
+                        //alert(JSON.stringify(params));
+                        UserService.getUsers(params).then((result) =>{
+                            if (result != null){
+                                Alert.alert("Success","Login successfully");
+                            }
+                        }).catch((error) => {
+                            Alert.alert("Error","error at loginForm");
+                        });
+                    }} 
+                                title={'SIGN IN'}/>
                 </View>
                 <View style={styles.social_container}>
                     <Image style={styles.btn_Social} source={require('../../resources/icon/facebook.png')}/>
