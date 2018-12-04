@@ -1,11 +1,7 @@
 import React, {Component} from "react";
-import {DataProvider, LayoutProvider, RecyclerListView} from "recyclerlistview";
-import {Constants} from "../../constants";
 import {TeacherService} from "../../services/api/teacherService";
 import TeacherBox from "../sharedComponent/teacherBox";
-import {CategoryService} from "../../services/api/categoryService";
 import {FlatList} from "react-native";
-import CategoryBox from "../sharedComponent/categoryBox";
 
 export default class TeacherListView extends Component {
     constructor(args) {

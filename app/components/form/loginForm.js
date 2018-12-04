@@ -1,19 +1,29 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, Image, Text} from 'react-native';
+import {Image, StyleSheet, Text, View} from 'react-native';
 import TextInputCustom from '../sharedComponent/textInputCustom';
 import ButtonCustom from '../sharedComponent/buttonCustom';
 import {Constants} from "../../constants";
 
 export default class LoginForm extends Component {
+    getUserName = (text) => {
+        this.setState({user_name: text})
+        alert(this.state.user_name)
+    }
+
+    getPassword = (text) => {
+        this.setState({password: text})
+        console.warn(this.state.password)
+    }
+
     render() {
         const {onPressSignIn, onPressRegister} = this.props;
         return (
             <View style={{flex: 1}}>
                 <View style={styles.input_form}>
-                    <TextInputCustom input_type={'User name'}/>
+                    <TextInputCustom getUserName={this.getUserName.bind(this)} input_type={'User name'}/>
                 </View>
                 <View style={styles.input_form}>
-                    <TextInputCustom input_type={'Password'}/>
+                    <TextInputCustom getPassword={this.getPassword.bind(this)} input_type={'Password'}/>
                 </View>
 
                 <View style={styles.btn_Sign_In}>
@@ -27,7 +37,7 @@ export default class LoginForm extends Component {
                 </View>
                 <View style={styles.btn_Register}>
                     <Text style={{fontSize: 14, fontFamily: 'System', color: 'white'}}
-                          onPress={onPressRegister}>Create Account</Text>
+                          onPress={onPressRegister}>Create New Account</Text>
                 </View>
             </View>
         );

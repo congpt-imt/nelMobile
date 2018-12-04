@@ -21,11 +21,16 @@ export default class TextInputCustom extends Component {
     }
 
     render() {
+        const {getUserName, getPassword} = this.props
+
         if (this.state.input_type === 'Password' || this.state.input_type === 'Confirm Password') {
             return (
                 <TextInput
                     value={this.state.text}
-                    onChangeText={(text) => this.setState({text})}
+                    onChangeText={(text) => {
+                        getPassword(text)
+                        this.setState({text})}
+                    }
                     placeholder={this.state.input_type}
                     placeholderTextColor={'gray'}
                     onFocus={this._onFocus.bind(this)}
@@ -43,7 +48,9 @@ export default class TextInputCustom extends Component {
         return (
             <TextInput
                 value={this.state.text}
-                onChangeText={(text) => this.setState({text})}
+                onChangeText={(text) => {
+                    getUserName(text)
+                    this.setState({text})}}
                 placeholder={this.state.input_type}
                 placeholderTextColor={'gray'}
                 onFocus={this._onFocus.bind(this)}
