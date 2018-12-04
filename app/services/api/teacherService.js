@@ -3,7 +3,7 @@ import {Constants} from "../../constants";
 export class TeacherService {
     static async getTeachers(succeeded, failed) {
         try {
-            let response = await fetch('http://192.168.137.1:8080/api/nel-user-management/find-teacher?nelcategory_id=5', {
+            let response = await fetch('http://192.168.137.1:8080/api/nel-user-management/teacher-list?category_id=1', {
                 method: 'GET',
                 headers: {
                     Authorization: 'Bearer ' + Constants.TOKEN,

@@ -1,11 +1,7 @@
 export class ChatService {
-    static getChatHistory(start, count) {
+    static getChatHistory() {
         const chatHistory = require('../../json_tmp/teachers');
-        const fullData = chatHistory.data;
-        const result = fullData.slice(
-            start,
-            Math.min(fullData.length, start + count)
-        );
+        const result = chatHistory.data;
 
         return result;
     }

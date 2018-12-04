@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, TouchableWithoutFeedback, View} from 'react-native';
+import {StyleSheet, Text, TouchableNativeFeedback, View} from 'react-native';
 import StarRating from 'react-native-star-rating';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AvatarBox from "./avatarBox";
@@ -12,7 +12,8 @@ export default class TeacherBox extends Component {
         const {description, teacher_name, image, stars, onPress} = this.props;
         return (
             <View style={styles.container_fluid}>
-                <TouchableWithoutFeedback onPress={onPress}>
+                <TouchableNativeFeedback onPress={onPress} useForeground={true}
+                                         background={TouchableNativeFeedback.Ripple('rgba(240, 240, 240, 0.1)', false)}>
                     <View style={styles.container}>
                         <View style={styles.image_teacher}>
                             <AvatarBox
@@ -44,7 +45,7 @@ export default class TeacherBox extends Component {
                             </View>
                         </View>
                     </View>
-                </TouchableWithoutFeedback>
+                </TouchableNativeFeedback>
             </View>
         );
     }
@@ -54,11 +55,13 @@ export default class TeacherBox extends Component {
 const styles = StyleSheet.create({
     container_fluid: {
         flex: 1,
-        justifyContent:'center',
+        justifyContent: 'center',
         alignItems: 'center',
     },
     container: {
         flex: 1,
+        paddingTop: 10,
+        paddingBottom: 10,
         flexDirection: 'row',
         backgroundColor: ColorTheme.BACKGROUND_COLOR,
     },
@@ -66,33 +69,33 @@ const styles = StyleSheet.create({
         flex: 3 / 10,
         backgroundColor: 'transparent',
         height: '100%',
-        justifyContent:'center',
+        justifyContent: 'center',
         alignItems: 'center'
     },
     describe_teacher: {
         flex: 7 / 10,
         backgroundColor: 'transparent',
         height: '100%',
-        justifyContent:'center',
+        justifyContent: 'center',
         marginLeft: 6,
     },
     teacher_name: {
         flex: 1,
         fontSize: 20,
         color: '#fff',
-        justifyContent:'center',
+        justifyContent: 'center',
     },
     rating: {
-        flex: 1/2,
+        flex: 1 / 2,
         width: '40%'
     },
     describe: {
-        flex: 3/2,
+        flex: 3 / 2,
         fontSize: 20,
         color: '#fff',
-        // marginTop: 4,
+        marginTop: 4,
         marginRight: 4,
-        justifyContent:'center',
+        justifyContent: 'center',
     },
     text_name: {
         fontSize: 17,

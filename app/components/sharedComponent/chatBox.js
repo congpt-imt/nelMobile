@@ -43,13 +43,13 @@ export default class ChatBox extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        height: 80,
     },
     image_teacher: {
         flex: 2 / 10,
         backgroundColor: 'transparent',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     chat_box: {
         flex: 8 / 10,
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     teacher_name: {
         flex: 1,
         marginRight: 4,
-        marginTop: 20,
+        marginTop: 15,
         flexDirection: 'row',
     },
     text_name: {

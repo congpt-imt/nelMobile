@@ -1,6 +1,8 @@
 export class Utils {
     static truncate(text, length) {
-        return text.length > length ? `${text.substr(0, length)}...` : text;
+        let newLength = text ? text.length : 0;
+        let newText = newLength > length ? `${text.substr(0, length)}...` : text;
+        return newText;
     }
 
     static regexUrl(str) {

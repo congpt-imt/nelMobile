@@ -4,8 +4,8 @@ import TeacherBox from "../sharedComponent/teacherBox";
 import {FlatList} from "react-native";
 
 export default class TeacherListView extends Component {
-    constructor(args) {
-        super(args);
+    constructor(props) {
+        super(props);
 
         this.state = {
             data: [],
@@ -49,7 +49,7 @@ export default class TeacherListView extends Component {
                     <TeacherBox
                         image={item.image}
                         teacher_name={item.teacher_name}
-                        description={item.description}
+                        description={item.discription}
                         stars={item.star}
                         onPress={onPress}
                     />
