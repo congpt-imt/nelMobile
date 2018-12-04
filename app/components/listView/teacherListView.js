@@ -4,6 +4,7 @@ import TeacherBox from "../sharedComponent/teacherBox";
 import {FlatList} from "react-native";
 
 export default class TeacherListView extends Component {
+
     constructor(props) {
         super(props);
 
@@ -17,15 +18,19 @@ export default class TeacherListView extends Component {
         this.inProgressNetworkReq = false;
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.fetchMoreData();
     }
 
     fetchMoreData() {
+        const min = 1;
+        const max = 10;
+        const categoryId = Math.floor(min + Math.random() * (max - min));
+
         if (!this.inProgressNetworkReq) {
             this.inProgressNetworkReq = true;
             this.setState({isLoading: true});
-            TeacherService.getTeachers((data) => {
+            TeacherService.getTeachers(categoryId, (data) => {
                 let temp = this.state.data
                 temp = temp.concat(data)
                 this.setState({

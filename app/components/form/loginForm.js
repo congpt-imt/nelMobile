@@ -5,14 +5,23 @@ import ButtonCustom from '../sharedComponent/buttonCustom';
 import {Constants} from "../../constants";
 
 export default class LoginForm extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            user_name: '',
+            password: ''
+        }
+    }
     getUserName = (text) => {
+        // console.warn(text)
         this.setState({user_name: text})
-        alert(this.state.user_name)
+        // console.warn(this.state.user_name)
     }
 
     getPassword = (text) => {
+        // console.warn(text)
         this.setState({password: text})
-        console.warn(this.state.password)
+        // console.warn(this.state.password)
     }
 
     render() {
