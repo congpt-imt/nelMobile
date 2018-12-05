@@ -1,67 +1,66 @@
 import React, {Component} from 'react';
-import {Image, StyleSheet, Text, View, Alert, Modal} from 'react-native';
+import {Alert, Image, StyleSheet, Text, View} from 'react-native';
 import TextInputCustom from '../sharedComponent/textInputCustom';
 import ButtonCustom from '../sharedComponent/buttonCustom';
-import {Constants} from "../../constants";
+import {Constants, Error} from "../../constants";
 import {UserService} from "../../services/api/userService";
 import PropTypes from "prop-types";
+import {Utils} from "../../utils/utils";
 
 export default class LoginForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            user_name: '',
-            password: ''
+            email: null,
+            password: null,
+            error: null,
         }
     }
-    getUserName = (text) => {
-        // console.warn(text)
-        this.setState({user_name: text})
-        // console.warn(this.state.user_name)
+
+    getEmail = (text) => {
+        this.setState({email: text})
     }
 
     getPassword = (text) => {
-        // console.warn(text)
         this.setState({password: text})
-        // console.warn(this.state.password)
     }
 
     _onPressSignIn = () => {
-        if (this.state.user_name.length == 0 || this.state.password.length == 0){
-            var error_code = 1;
-            this._errorModal(error_code);
-        }else{
+        if (!this.state.email || !this.state.password) {
+            this.setState({error: Error.EMAIL_PASSWORD_NULL})
+        } else if (!Utils.validateEmail(this.state.email)) {
+            this.setState({error: Error.INVALID_EMAIL})
+        } else {
             const params = {
-                "email": this.state.user_name,
+                "email": this.state.email,
                 "password": this.state.password
             }
 
-            UserService.getUsers(params, (success) => {
-                if (success == "true"){
-                    this.props.onPressSignIn.navigate("Drawer");
-                }else{
-                    var error_code = 2;
-                    this._errorModal(err);
+            UserService.login(params, (success) => {
+                if (success.success) {
+                    this.props.onPress.navigate("Drawer");
+                    // Lưu Token vô: success.token
+                } else {
+                    this.setState({error: Error.EMAIL_PASSWORD_WRONG})
                 }
+            }, (failed) => {
+                console.log(failed)
             });
-        } 
-    }
-
-    _errorModal= (error_code)=>{
-        if (error_code == 1){
-            Alert.alert("Error","Please enter your username and password");
-        }else if (error_code == 2){
-            Alert.alert("Error","Can't find user");
         }
-        
     }
 
     render() {
-        const {onPressSignIn, onPressRegister} = this.props;
+        {
+            this.state.error ? Alert.alert('Error', this.state.error, [{
+                text: 'OK',
+                onPress: () => this.setState({error: null})
+            },]) : null
+        }
         return (
             <View style={{flex: 1}}>
+                {/*em có thể bỏ cái modal gì đó vô đây thay cho cái alert phía trên*/}
                 <View style={styles.input_form}>
-                    <TextInputCustom getUserName={this.getUserName.bind(this)} input_type={'User name'}/>
+                    <TextInputCustom getEmail={this.getEmail.bind(this)} input_type={'Email'}/>
                 </View>
                 <View style={styles.input_form}>
                     <TextInputCustom getPassword={this.getPassword.bind(this)} input_type={'Password'}/>
@@ -78,7 +77,7 @@ export default class LoginForm extends Component {
                 </View>
                 <View style={styles.btn_Register}>
                     <Text style={{fontSize: 14, fontFamily: 'System', color: 'white'}}
-                          onPress={onPressRegister}>Create New Account</Text>
+                          onPress={() => this.props.onPress.navigate('Register')}>Create New Account</Text>
                 </View>
             </View>
         );
@@ -86,7 +85,7 @@ export default class LoginForm extends Component {
 }
 
 LoginForm.propTypes = {
-    onPressSignIn: PropTypes.func
+    onPress: PropTypes.func
 }
 
 const styles = StyleSheet.create({

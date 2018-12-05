@@ -1,6 +1,5 @@
 import {Dimensions} from "react-native";
 
-
 export const Constants = {
     SIZE_WINDOW: Dimensions.get('window'),
     VIEW_TYPE_FULL: 1,
@@ -17,4 +16,16 @@ export const ColorTheme = {
     BAR_COLOR: '#2B2C33',
     ICON_COLOR: '#FFFFFF',
     MESSAGE_BOX_COLOR: '#1986D8',
+}
+
+export const Error = {
+    PASSWORD_NULL: 'Please enter password',
+    PASSWORD_CONFIRM_NULL: 'Please enter confirm password',
+    PASSWORD_NOT_MATCH: 'Confirm password is not match',
+    USERNAME_NULL: 'Please enter username',
+    EMAIL_PASSWORD_NULL: 'Please enter email and password',
+    EMAIL_PASSWORD_WRONG: 'Email or password is incorrect',
+    EMAIL_NULL: 'Please enter email',
+    INVALID_EMAIL: 'Invalid email',
+    EMAIL_EXISTS: 'Email already exists'
 }

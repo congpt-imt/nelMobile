@@ -5,6 +5,11 @@ export class Utils {
         return newText;
     }
 
+    static validateEmail(str) {
+        let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        return regex.test(str) ? true : false;
+    }
+
     static regexUrl(str) {
         const url = str.match(/((http(s)?(\:\/\/))+(www\.)?([\w\-\.\/])*(\.[a-zA-Z]{2,3}\/?))[^\s\b\n|]*[^.,;:\?\!\@\^\$ -]/g);
         return url;

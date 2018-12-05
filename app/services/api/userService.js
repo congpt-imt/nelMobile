@@ -1,8 +1,7 @@
 import {Constants} from "../../constants";
-import {Alert} from 'react-native';
 
 export class UserService {
-    static async getUsers(params, succeeded, failed) {
+    static async login(params, succeeded, failed) {
         try {
             let response = await fetch('http://192.168.137.1:8080/api/nel-user-management/login', {
                 method: 'POST',
@@ -14,8 +13,7 @@ export class UserService {
                 body: JSON.stringify(params),
             });
 
-            let users = await response.json();
-            let result = users.success;
+            let result = await response.json();
             succeeded(result);
         } catch (error) {
             failed(error);
@@ -23,7 +21,7 @@ export class UserService {
     }
 
     //Register
-    static async registerUser(params, succeeded, failed) {
+    static async register(params, succeeded, failed) {
         try {
             let response = await fetch('http://192.168.137.1:8080/api/nel-user-management/register', {
                 method: 'POST',
@@ -35,9 +33,7 @@ export class UserService {
                 body: JSON.stringify(params),
             });
 
-            let data = await response.json();
-            let result = data.success;
-            //Alert.alert(result);
+            let result = await response.json();
             succeeded(result);
         } catch (error) {
             failed(error);

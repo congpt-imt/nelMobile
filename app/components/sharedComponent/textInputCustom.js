@@ -8,7 +8,7 @@ export default class TextInputCustom extends Component {
         this.state = {
             input_type: this.props.input_type,
             borderBottomWidth: 0.3,
-            text: '',
+            text: null,
         };
     }
 
@@ -20,92 +20,50 @@ export default class TextInputCustom extends Component {
         this.setState({borderBottomWidth: 0.3})
     }
 
-    render() {
-        const {getUserName, getPassword, getConfirmPassword, getEmail} = this.props
-
-        if (this.state.input_type === 'Password') {
-            return (
-                <TextInput
-                    value={this.state.text}
-                    onChangeText={(text) => {
-                        getPassword(text)
-                        this.setState({text})}
-                    }
-                    placeholder={this.state.input_type}
-                    placeholderTextColor={'gray'}
-                    onFocus={this._onFocus.bind(this)}
-                    onBlur={this._onBlur.bind(this)}
-                    secureTextEntry={true}
-                    style={{
-                        borderBottomWidth: this.state.borderBottomWidth,
-                        borderBottomColor: '#FFFFFF',
-                        color: '#FFFFFF',
-                        fontSize: 15,
-                    }}
-                />)
-        }else if (this.state.input_type === 'Confirm Password') {
-            return (
-                <TextInput
-                    value={this.state.text}
-                    onChangeText={(text) => {
-                        getConfirmPassword(text)
-                        this.setState({text})}
-                    }
-                    placeholder={this.state.input_type}
-                    placeholderTextColor={'gray'}
-                    onFocus={this._onFocus.bind(this)}
-                    onBlur={this._onBlur.bind(this)}
-                    secureTextEntry={true}
-                    style={{
-                        borderBottomWidth: this.state.borderBottomWidth,
-                        borderBottomColor: '#FFFFFF',
-                        color: '#FFFFFF',
-                        fontSize: 15,
-                    }}
-                />)
-        }else if (this.state.input_type === 'Email') {
-            return (
-                <TextInput
-                    value={this.state.text}
-                    onChangeText={(text) => {
-                        getEmail(text)
-                        this.setState({text})}
-                    }
-                    placeholder={this.state.input_type}
-                    placeholderTextColor={'gray'}
-                    onFocus={this._onFocus.bind(this)}
-                    onBlur={this._onBlur.bind(this)}
-                    keyboardType='email-address'
-                    style={{
-                        borderBottomWidth: this.state.borderBottomWidth,
-                        borderBottomColor: '#FFFFFF',
-                        color: '#FFFFFF',
-                        fontSize: 15,
-                    }}
-                />)
-        }else if (this.state.input_type === 'User name') {
-            return (
-                <TextInput
-                    value={this.state.text}
-                    onChangeText={(text) => {
-                        getUserName(text)
-                        this.setState({text})}}
-                    placeholder={this.state.input_type}
-                    placeholderTextColor={'gray'}
-                    onFocus={this._onFocus.bind(this)}
-                    onBlur={this._onBlur.bind(this)}
-                    style={{
-                        borderBottomWidth: this.state.borderBottomWidth,
-                        borderBottomColor: '#FFFFFF',
-                        color: '#FFFFFF',
-                        fontSize: 15,
-                    }}
-                />
-            );
+    _passText = (text) => {
+        switch (this.state.input_type) {
+            case 'User name':
+                return this.props.getUserName(text);
+            case 'Email':
+                return this.props.getEmail(text);
+            case 'Password':
+                return this.props.getPassword(text);
+            case 'Confirm Password':
+                return this.props.getConfirmPassword(text);
         }
+    }
+
+    render() {
+        let isPassword = this.state.input_type === 'Password' || this.state.input_type === 'Confirm Password' ? true : false;
+        let keyboardType = this.state.input_type === 'Email' ? 'email-address' : 'default';
+
+        return (
+            <TextInput
+                value={this.state.text}
+                onChangeText={(text) => {
+                    this._passText(text)
+                    this.setState({text})
+                }}
+                placeholder={this.state.input_type}
+                placeholderTextColor={'gray'}
+                onFocus={this._onFocus.bind(this)}
+                onBlur={this._onBlur.bind(this)}
+                secureTextEntry={isPassword}
+                keyboardType={keyboardType}
+                style={{
+                    borderBottomWidth: this.state.borderBottomWidth,
+                    borderBottomColor: '#FFFFFF',
+                    color: '#FFFFFF',
+                    fontSize: 15,
+                }}
+            />);
     }
 }
 
 TextInputCustom.propTypes = {
-    input_type: PropTypes.string
+    input_type: PropTypes.string,
+    getUserName: PropTypes.func,
+    getPassword: PropTypes.func,
+    getConfirmPassword: PropTypes.func,
+    getEmail: PropTypes.func,
 }

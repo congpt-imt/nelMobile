@@ -16,9 +16,7 @@ export default class Login extends Component {
 
                 <View style={styles.container}>
                     <LoginForm
-                        onPressSignIn={this.props.navigation}
-                        onPressSignUp={this.props.navigation}
-                        onPressRegister={() => this.props.navigation.navigate('Register')}/>
+                        onPress={this.props.navigation}/>
                 </View>
             </KeyboardAvoidingView>
         );
