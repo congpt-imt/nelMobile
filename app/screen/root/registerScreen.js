@@ -17,7 +17,7 @@ export default class Register extends Component {
 
                 <View style={styles.container}>
                     <RegisterForm
-                        onPressSignUp={() => this.props.navigation.navigate('Drawer')}
+                        onPressSignUp={this.props.navigation}
                         goBack={() => this.props.navigation.navigate('Login')}/>
                 </View>
             </KeyboardAvoidingView>

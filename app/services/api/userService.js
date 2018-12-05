@@ -16,6 +16,27 @@ export class UserService {
 
             let users = await response.json();
             let result = users.success;
+            succeeded(result);
+        } catch (error) {
+            failed(error);
+        }
+    }
+
+    //Register
+    static async registerUser(params, succeeded, failed) {
+        try {
+            let response = await fetch('http://192.168.137.1:8080/api/nel-user-management/register', {
+                method: 'POST',
+                headers: {
+                    Authorization: 'Bearer ' + Constants.TOKEN,
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(params),
+            });
+
+            let data = await response.json();
+            let result = data.success;
             //Alert.alert(result);
             succeeded(result);
         } catch (error) {
