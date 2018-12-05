@@ -51,6 +51,7 @@ export default class TextInputCustom extends Component {
                 onChangeText={(text) => {
                     getUserName(text)
                     this.setState({text})}}
+                keyboardType='email-address'
                 placeholder={this.state.input_type}
                 placeholderTextColor={'gray'}
                 onFocus={this._onFocus.bind(this)}
