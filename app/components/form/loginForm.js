@@ -37,7 +37,7 @@ export default class LoginForm extends Component {
             }
 
             UserService.login(params, (success) => {
-                if (success.success) {
+                if (success.success === "true") {
                     this.props.onPress.navigate("Drawer");
                     // Lưu Token vô: success.token
                 } else {
@@ -51,7 +51,7 @@ export default class LoginForm extends Component {
 
     render() {
         {
-            this.state.error ? Alert.alert('Error', this.state.error, [{
+            this.state.error ? Alert.alert('Warning', this.state.error, [{
                 text: 'OK',
                 onPress: () => this.setState({error: null})
             },]) : null

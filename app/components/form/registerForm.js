@@ -70,7 +70,7 @@ export default class RegisterForm extends Component {
 
     render() {
         {
-            this.state.error ? Alert.alert('Error', this.state.error, [{
+            this.state.error ? Alert.alert('Warning', this.state.error, [{
                 text: 'OK',
                 onPress: () => this.setState({error: null})
             },]) : null
