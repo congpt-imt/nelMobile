@@ -148,6 +148,7 @@ const styles = StyleSheet.create({
     },
     btn_Update: {
         flex: 1,
+        margin: 20,
         height: 40,
         justifyContent:'flex-end',
     },

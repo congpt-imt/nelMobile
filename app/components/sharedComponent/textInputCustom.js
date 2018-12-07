@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {TextInput} from 'react-native';
+import React, { Component } from 'react';
+import { TextInput } from 'react-native';
 import PropTypes from "prop-types";
 
 export default class TextInputCustom extends Component {
@@ -13,11 +13,11 @@ export default class TextInputCustom extends Component {
     }
 
     _onFocus = () => {
-        this.setState({borderBottomWidth: 1.5})
+        this.setState({ borderBottomWidth: 1.5 })
     }
 
     _onBlur = () => {
-        this.setState({borderBottomWidth: 0.3})
+        this.setState({ borderBottomWidth: 0.3 })
     }
 
     _passText = (text) => {
@@ -35,14 +35,15 @@ export default class TextInputCustom extends Component {
 
     render() {
         let isPassword = this.state.input_type === 'Password' || this.state.input_type === 'Confirm Password' ? true : false;
-        let keyboardType = this.state.input_type === 'Email' ? 'email-address' : 'default';
+        let keyboardType = this.state.input_type === 'Email' ? 'email-address' : (this.state.input_type === 'Phone' ? 'phone-pad' : 'default');
+        let textArea = this.state.input_type === 'Work' || this.state.input_type === 'Education' ? true : false;
 
         return (
             <TextInput
                 value={this.state.text}
                 onChangeText={(text) => {
                     this._passText(text)
-                    this.setState({text})
+                    this.setState({ text })
                 }}
                 placeholder={this.state.input_type}
                 placeholderTextColor={'gray'}
@@ -50,6 +51,7 @@ export default class TextInputCustom extends Component {
                 onBlur={this._onBlur.bind(this)}
                 secureTextEntry={isPassword}
                 keyboardType={keyboardType}
+                multiline={textArea}
                 style={{
                     borderBottomWidth: this.state.borderBottomWidth,
                     borderBottomColor: '#FFFFFF',

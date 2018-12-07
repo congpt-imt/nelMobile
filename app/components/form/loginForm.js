@@ -26,27 +26,28 @@ export default class LoginForm extends Component {
     }
 
     _onPressSignIn = () => {
-        if (!this.state.email || !this.state.password) {
-            this.setState({error: Error.EMAIL_PASSWORD_NULL})
-        } else if (!Utils.validateEmail(this.state.email)) {
-            this.setState({error: Error.INVALID_EMAIL})
-        } else {
-            const params = {
-                "email": this.state.email,
-                "password": this.state.password
-            }
+        this.props.onPress.navigate("Drawer");
+        // if (!this.state.email || !this.state.password) {
+        //     this.setState({error: Error.EMAIL_PASSWORD_NULL})
+        // } else if (!Utils.validateEmail(this.state.email)) {
+        //     this.setState({error: Error.INVALID_EMAIL})
+        // } else {
+        //     const params = {
+        //         "email": this.state.email,
+        //         "password": this.state.password
+        //     }
 
-            UserService.login(params, (success) => {
-                if (success.success === "true") {
-                    this.props.onPress.navigate("Drawer");
-                    // Lưu Token vô: success.token
-                } else {
-                    this.setState({error: Error.EMAIL_PASSWORD_WRONG})
-                }
-            }, (failed) => {
-                console.log(failed)
-            });
-        }
+        //     UserService.login(params, (success) => {
+        //         if (success.success === "true") {
+        //             this.props.onPress.navigate("Drawer");
+        //             // Lưu Token vô: success.token
+        //         } else {
+        //             this.setState({error: Error.EMAIL_PASSWORD_WRONG})
+        //         }
+        //     }, (failed) => {
+        //         console.log(failed)
+        //     });
+        // }
     }
 
     render() {
@@ -65,7 +66,7 @@ export default class LoginForm extends Component {
                 <View style={styles.input_form}>
                     <TextInputCustom getPassword={this.getPassword.bind(this)} input_type={'Password'}/>
                 </View>
-
+                
                 <View style={styles.btn_Sign_In}>
                     <ButtonCustom onPress={this._onPressSignIn} title={'SIGN IN'}/>
                 </View>

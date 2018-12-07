@@ -1,19 +1,19 @@
-import React, {Component} from 'react';
-import {StyleSheet, Text, TouchableNativeFeedback, View} from 'react-native';
+import React, { Component } from 'react';
+import { StyleSheet, Text, TouchableNativeFeedback, View } from 'react-native';
 import AvatarBox from "./avatarBox";
-import {generalStyle} from "../../resources/stylesheet/stylesheet";
-import {Utils} from "../../utils/utils";
+import { generalStyle } from "../../resources/stylesheet/stylesheet";
+import { Utils } from "../../utils/utils";
 
 export default class ChatBox extends Component {
 
     render() {
-        const {onPress, image, name} = this.props;
+        const { onPress, image, name } = this.props;
         const text = 'Chào bạn, rất vui được gặp bạn trong buổi sáng hôm nay';
 
         return (
             <View style={styles.container}>
                 <TouchableNativeFeedback onPress={onPress} useForeground={true}
-                                         background={TouchableNativeFeedback.Ripple('rgba(240, 240, 240, 0.1)', false)}>
+                    background={TouchableNativeFeedback.Ripple('rgba(240, 240, 240, 0.1)', false)}>
                     <View style={generalStyle.container_row}>
                         <View style={styles.image_teacher}>
                             <AvatarBox
@@ -35,10 +35,10 @@ export default class ChatBox extends Component {
                         </View>
                     </View>
                 </TouchableNativeFeedback>
+                <View style={styles.line} />
             </View>
         );
     }
-
 }
 
 const styles = StyleSheet.create({
@@ -92,5 +92,11 @@ const styles = StyleSheet.create({
         fontSize: 13,
         color: '#C1C1C1',
         textAlign: 'right',
+    },
+    line: {
+        height: 0.5,
+        backgroundColor: '#678DBA',
+        marginLeft: 20,
+        marginRight: 20
     }
 });

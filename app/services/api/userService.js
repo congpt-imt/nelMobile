@@ -39,4 +39,13 @@ export class UserService {
             failed(error);
         }
     }
+
+    static getProfile() {
+        const profile = require('../../json_tmp/userProfile');
+        return profile.data;
+    }
+
+    static updateProfile(){
+        return true;
+    }
 }
