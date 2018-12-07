@@ -1,6 +1,6 @@
 import {createDrawerNavigator, createStackNavigator} from 'react-navigation';
 import HomeStack from './homeTabNavigator';
-import Profile from '../screen/profile/profileScreen';
+import Profile from './profileTabNavigator';
 import React from "react";
 import ChatStack from "./chatTabNavigator";
 import {View} from "react-native";
