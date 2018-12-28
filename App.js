@@ -12,7 +12,7 @@ import Router from './app/routes/router';
 // import { configureStore } from './app/store';
 
 export default class App extends Component {
-
+    
     render() {
         return (
             <Router/>

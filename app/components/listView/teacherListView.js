@@ -23,9 +23,7 @@ export default class TeacherListView extends Component {
     }
 
     fetchMoreData() {
-        const min = 1;
-        const max = 10;
-        const categoryId = Math.floor(min + Math.random() * (max - min));
+        const categoryId = 5;
 
         if (!this.inProgressNetworkReq) {
             this.inProgressNetworkReq = true;
@@ -52,10 +50,10 @@ export default class TeacherListView extends Component {
                 data={this.state.data}
                 renderItem={({item}) => (
                     <TeacherBox
-                        image={item.image}
-                        teacher_name={item.teacher_name}
+                        image={item.imageUrl}
+                        teacher_name={item.username}
                         description={item.discription}
-                        stars={item.star}
+                        stars={item.rating}
                         onPress={onPress}
                     />
                 )}

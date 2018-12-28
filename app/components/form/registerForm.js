@@ -56,8 +56,8 @@ export default class RegisterForm extends Component {
                 "username": this.state.user_name
             }
 
-            UserService.register(params, (success) => {
-                if (success.success) {
+            UserService.register(params, (result) => {
+                if (result.errorMsg === "") {
                     this.props.onPressSignUp.navigate("Drawer");
                 } else {
                     this.setState({error: Error.EMAIL_EXISTS});

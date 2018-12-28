@@ -1,8 +1,8 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import CategoryBox from "../sharedComponent/categoryBox";
-import {CategoryService} from "../../services/api/categoryService";
-import {Constants} from "../../constants";
-import {FlatList} from "react-native";
+import { CategoryService } from "../../services/api/categoryService";
+import { Constants } from "../../constants";
+import { FlatList } from "react-native";
 
 export default class CategoryListView extends Component {
     constructor(props) {
@@ -35,27 +35,27 @@ export default class CategoryListView extends Component {
                 });
                 this.inProgressNetworkReq = false;
             }, (data) => {
-                this.setState({error: data});
+                this.setState({ error: data });
             });
         }
     }
 
     render() {
-        const {onPress} = this.props;
+        const { onPress } = this.props;
         return (
             <FlatList
                 data={this.state.data}
-                columnWrapperStyle={{marginTop: 5}}
+                columnWrapperStyle={{ marginTop: 5 }}
                 horizontal={false}
                 numColumns={2}
-                renderItem={({item}) => (
+                renderItem={({ item }) => (
                     <CategoryBox
-                    category_id={item.id}
-                    image={item.image}
-                    category_name={item.name}
-                    width={Constants.SIZE_WINDOW.width / 3 - 20}
-                    height={Constants.SIZE_WINDOW.width / 3 - 20}
-                    onPress={onPress}/>
+                        category_id={item.id}
+                        image={item.imageUrl}
+                        category_name={item.name}
+                        width={Constants.SIZE_WINDOW.width / 3 - 20}
+                        height={Constants.SIZE_WINDOW.width / 3 - 20}
+                        onPress={onPress} />
                 )}
             />
         );

@@ -6,11 +6,11 @@ import {ColorTheme} from "../constants";
 
 const ProfileStack = createStackNavigator(
     {
-        Home:  Profile,
+        Profile:  Profile,
         Update: UpdateProfileForm,
     },
     {
-        initialRouteName: 'Home',
+        initialRouteName: 'Profile',
         headerMode: 'none',
         mode: 'card',
         cardStyle: { backgroundColor: ColorTheme.BACKGROUND_COLOR },

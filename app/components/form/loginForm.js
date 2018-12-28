@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Alert, Image, StyleSheet, Text, View} from 'react-native';
+import {Alert, Image, StyleSheet, Text, View, CheckBox} from 'react-native';
 import TextInputCustom from '../sharedComponent/textInputCustom';
 import ButtonCustom from '../sharedComponent/buttonCustom';
 import {Constants, Error} from "../../constants";
@@ -11,6 +11,7 @@ export default class LoginForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            checked: false,
             email: null,
             password: null,
             error: null,
@@ -26,6 +27,8 @@ export default class LoginForm extends Component {
     }
 
     _onPressSignIn = () => {
+        let user = require('../../json_tmp/userProfile');
+        user.id = this.state.email;
         this.props.onPress.navigate("Drawer");
         // if (!this.state.email || !this.state.password) {
         //     this.setState({error: Error.EMAIL_PASSWORD_NULL})
@@ -37,8 +40,8 @@ export default class LoginForm extends Component {
         //         "password": this.state.password
         //     }
 
-        //     UserService.login(params, (success) => {
-        //         if (success.success === "true") {
+        //     UserService.login(params, (result) => {
+        //         if (result.errorMsg === "") {
         //             this.props.onPress.navigate("Drawer");
         //             // Lưu Token vô: success.token
         //         } else {
@@ -63,10 +66,17 @@ export default class LoginForm extends Component {
                 <View style={styles.input_form}>
                     <TextInputCustom getEmail={this.getEmail.bind(this)} input_type={'Email'}/>
                 </View>
+
                 <View style={styles.input_form}>
                     <TextInputCustom getPassword={this.getPassword.bind(this)} input_type={'Password'}/>
                 </View>
                 
+                <View style={styles.checkbox}>
+                        <CheckBox value={this.state.checked}
+                                onValueChange={() => this.setState({ checked: !this.state.checked })}/>
+                        <Text style={{marginTop: 5, color:'gray'}}>Remember me</Text>
+                </View>
+
                 <View style={styles.btn_Sign_In}>
                     <ButtonCustom onPress={this._onPressSignIn} title={'SIGN IN'}/>
                 </View>
@@ -95,6 +105,12 @@ const styles = StyleSheet.create({
         paddingLeft: 10,
         paddingRight: 10,
         marginBottom: 10,
+    },
+    checkbox:{
+        paddingLeft: 10,
+        paddingRight: 10,
+        marginBottom: 10,
+        flexDirection: 'row'
     },
     btn_Sign_In: {
         height: 40,
