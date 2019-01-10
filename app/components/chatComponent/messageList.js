@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { StyleSheet, FlatList, Text, View } from 'react-native';
+import { KeyboardAwareFlatList } from 'react-native-keyboard-aware-scroll-view'
 import PropTypes from "prop-types";
 import MessageRow from "./messageRow";
+import { Constants } from "../../constants"
 
 export default class MessageList extends Component {
     constructor() {
@@ -20,37 +22,25 @@ export default class MessageList extends Component {
         }
 
         this.itemLayout = (data, index) => (
-            { length: 50, offset: 50 * index, index }
+            { length: 100, offset: 100 * index, index }
         )
     }
 
     refresh = () => {
         const self = this
-        setTimeout(() => { self.refs.flatList.scrollToEnd(), 200 });
+        setTimeout(() => { self.refs.flatList.scrollToEnd()});
     }
 
-    componentDidMount() {
+    componentDidMount = () => {
         this.refresh();
     }
-
-    // componentDidMount() {
-    //     const self = this
-    //     setTimeout(function () {
-    //         self.flatList.scrollToEnd()
-    //     }, 2000)
-    // }
-
-    // componentDidUpdate() {
-    //     if (this.props.data.length) {
-    //         this.flatList.scrollToIndex({animated: true, index: 0});
-    //     }
-    // }
 
     render() {
         const data = this.props.data
         return (
             <View style={styles.container}>
                 <FlatList
+                    style={{ height: Constants.SIZE_WINDOW.height - 150, padding: 10 }}
                     ref={"flatList"}
                     data={data}
                     keyExtractor={(item, index) => index}

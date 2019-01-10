@@ -1,30 +1,26 @@
 import React, { Component } from 'react';
-import { View, TextInput, StyleSheet, TouchableOpacity, ScrollView, Text } from 'react-native';
+import { View, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
 import { generalStyle } from "../../resources/stylesheet/stylesheet";
 import { ColorTheme, Constants } from "../../constants";
 import Icon from "react-native-vector-icons/Ionicons";
 import MessageList from "../../components/chatComponent/messageList";
 import io from "socket.io-client/dist/socket.io"
+import { ChatService } from "../../services/api/chatService";
 
 var thisChat;
 export default class Chat extends Component {
     constructor(props) {
         super(props);
         thisChat = this;
-        const data = require('../../json_tmp/chat');
-        const messages = data.data;
         const user = require('../../json_tmp/userProfile');
 
         thisChat.state = {
             id: user.id,
             image: user.image,
             typed: '',
-            messagesHistory: messages,
+            messagesHistory: [],
         };
         this.socket = io('http://125.234.14.225:8088')
-        this.socket.on('connect', function (data) {
-            alert(thisChat.state.id + ' connected');
-        });
 
         this.socket.on('message', function (data) {
             let t = thisChat.state.messagesHistory;
@@ -32,15 +28,17 @@ export default class Chat extends Component {
                 "text": data.content,
                 "image": data.id == thisChat.state.id ? "" : data.image,
                 "time": data.time,
-                "isCurrentUser": data.id == thisChat.state.id ? true : false,
+                "isCurrentUser": data.id_from == thisChat.state.id ? true : false,
             }
             t.push(message);
+
             //Push message to messagesHistory
             thisChat.setState((prevState) => {
                 return {
                     messagesHistory: t
                 };
             });
+
             //Refresh FlatList
             thisChat.refs.messageList.refresh();
 
@@ -50,7 +48,8 @@ export default class Chat extends Component {
     _onPressSend = () => {
         if (thisChat.state.typed != "") {
             let messageSend = {
-                "id": thisChat.state.id,
+                "id_from": thisChat.state.id,
+                "id_to": thisChat.state.id == 1 ? 2 : 1,
                 "content": thisChat.state.typed,
                 "image": thisChat.state.image,
                 "time": "11:11",
@@ -61,7 +60,58 @@ export default class Chat extends Component {
                     typed: '',
                 };
             });
+
+            //Save message to DB
+            const params = {
+                "fromId": thisChat.state.id,
+                "toId": thisChat.state.id == 1 ? 2 : 1,
+                "content": thisChat.state.typed,
+                "create_at": "2019-01-10",
+                "read": true,
+            }
+
+            ChatService.saveMessages(params);
         }
+    }
+
+    componentWillMount() {
+        thisChat.fetchMoreData();
+    }
+
+    sortByProperty = function (property) {
+        return function (x, y) {
+            return ((x[property] === y[property]) ? 0 : ((x[property] > y[property]) ? 1 : -1));
+        };
+    
+    };
+    
+    fetchMoreData() {
+        let idFrom = thisChat.state.id;
+        let idTo = idFrom == 1 ? 2 : 1;
+        ChatService.getMessagesHistory(idFrom, idTo, (data) => {
+            let temp = [];
+            temp = temp.concat(data);
+            ChatService.getMessagesHistory(idTo, idFrom, (data) => {
+                temp = temp.concat(data);
+                temp.sort(thisChat.sortByProperty('id'));
+                
+                let List = [];
+                for (var i = 0; i < temp.length; i++) {
+                    let message = {
+                        "text": temp[i].content,
+                        "image": temp[i].id == thisChat.state.id ? "" : temp.image,
+                        "time": temp[i].create_at,
+                        "isCurrentUser": temp[i].fromId == thisChat.state.id ? true : false,
+                    }
+                    List.push(message);
+                }
+                thisChat.setState((prevState) => {
+                    return {
+                        messagesHistory: List
+                    };
+                });
+            });
+        });
     }
 
     render() {

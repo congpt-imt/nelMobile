@@ -23,7 +23,7 @@ export default class TeacherListView extends Component {
     }
 
     fetchMoreData() {
-        const categoryId = 5;
+        const categoryId = 1;
 
         if (!this.inProgressNetworkReq) {
             this.inProgressNetworkReq = true;
