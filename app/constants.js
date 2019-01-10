@@ -2,7 +2,7 @@ import {Dimensions} from "react-native";
 
 export const Constants = {
     SIZE_WINDOW: Dimensions.get('window'),
-    VIEW_TYPE_FULL: 1,
+    VIEW_TYPE_FULL: 1, 
     VIEW_TYPE_HALF: 0,
     HEIGHT_BAR: 50,
     GOOGLE_API_KEY: 'AIzaSyARzBhXPhu4mvV-gM_2i6JWQvdGMuRkd1s',
