@@ -5,7 +5,6 @@ import { ColorTheme, Constants } from "../../constants";
 import Icon from "react-native-vector-icons/Ionicons";
 import MessageList from "../../components/chatComponent/messageList";
 import io from "socket.io-client/dist/socket.io"
-import { ChatService } from "../../services/api/chatService";
 
 var thisChat;
 export default class Chat extends Component {
@@ -18,24 +17,22 @@ export default class Chat extends Component {
             id: user.id,
             image: user.image,
             typed: '',
-            messagesHistory: [],
+            message: {},
         };
         this.socket = io('http://125.234.14.225:8088')
 
         this.socket.on('message', function (data) {
-            let t = thisChat.state.messagesHistory;
-            let message = {
+            let messageRev = {
                 "text": data.content,
                 "image": data.id == thisChat.state.id ? "" : data.image,
                 "time": data.time,
                 "isCurrentUser": data.id_from == thisChat.state.id ? true : false,
             }
-            t.push(message);
-
-            //Push message to messagesHistory
+            
             thisChat.setState((prevState) => {
                 return {
-                    messagesHistory: t
+                    typed: '',
+                    message: messageRev
                 };
             });
 
@@ -58,67 +55,28 @@ export default class Chat extends Component {
             thisChat.setState((prevState) => {
                 return {
                     typed: '',
+                    message: messageSend
                 };
             });
 
             //Save message to DB
-            const params = {
-                "fromId": thisChat.state.id,
-                "toId": thisChat.state.id == 1 ? 2 : 1,
-                "content": thisChat.state.typed,
-                "create_at": "2019-01-10",
-                "read": true,
-            }
+            // const params = {
+            //     "fromId": thisChat.state.id,
+            //     "toId": thisChat.state.id == 1 ? 2 : 1,
+            //     "content": thisChat.state.typed,
+            //     "create_at": "2019-01-11",
+            //     "read": true,
+            // }
 
-            ChatService.saveMessages(params);
+            // ChatService.saveMessages(params);
         }
-    }
-
-    componentWillMount() {
-        thisChat.fetchMoreData();
-    }
-
-    sortByProperty = function (property) {
-        return function (x, y) {
-            return ((x[property] === y[property]) ? 0 : ((x[property] > y[property]) ? 1 : -1));
-        };
-    
-    };
-    
-    fetchMoreData() {
-        let idFrom = thisChat.state.id;
-        let idTo = idFrom == 1 ? 2 : 1;
-        ChatService.getMessagesHistory(idFrom, idTo, (data) => {
-            let temp = [];
-            temp = temp.concat(data);
-            ChatService.getMessagesHistory(idTo, idFrom, (data) => {
-                temp = temp.concat(data);
-                temp.sort(thisChat.sortByProperty('id'));
-                
-                let List = [];
-                for (var i = 0; i < temp.length; i++) {
-                    let message = {
-                        "text": temp[i].content,
-                        "image": temp[i].id == thisChat.state.id ? "" : temp.image,
-                        "time": temp[i].create_at,
-                        "isCurrentUser": temp[i].fromId == thisChat.state.id ? true : false,
-                    }
-                    List.push(message);
-                }
-                thisChat.setState((prevState) => {
-                    return {
-                        messagesHistory: List
-                    };
-                });
-            });
-        });
     }
 
     render() {
         return (
             <View style={generalStyle.container} >
                 <View style={styles.message_list}>
-                    <MessageList ref={'messageList'} data={thisChat.state.messagesHistory} />
+                    <MessageList ref={'messageList'} data={thisChat.state.message} />
                 </View>
                 <View style={styles.message_form}>
                     <View style={styles.message_input}>

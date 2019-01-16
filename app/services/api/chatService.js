@@ -7,9 +7,9 @@ export class ChatService {
         return result;
     }
 
-    static async getMessagesHistory(idFrom, idTo, succeeded, failed) {
+    static async getMessagesHistory(idFrom, idTo, page, succeeded, failed) {
         try {
-            let response = await fetch('http://192.168.137.1:8080/api/nel-messages-histories/' + idFrom + "/{idTo}?idTo=" + idTo, {
+            let response = await fetch('http://192.168.137.1:8080/api/nel-messages-histories/idfrom-and-idto?idFrom=' + idFrom + '&idTo=' + idTo + '&page=' + page + '&size=10', {
                 method: 'GET',
                 headers: {
                     Authorization: 'Bearer ' + Constants.TOKEN,
@@ -17,7 +17,7 @@ export class ChatService {
                 }
             });
             let messages = await response.json();
-            succeeded(messages.data);
+            succeeded(messages);
         } catch (error) {
             failed(error);
         }
