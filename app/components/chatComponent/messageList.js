@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
 import { StyleSheet, FlatList, Text, View } from 'react-native';
-import { KeyboardAwareFlatList } from 'react-native-keyboard-aware-scroll-view'
-import PropTypes from "prop-types";
 import MessageRow from "./messageRow";
 import { Constants } from "../../constants"
 import { ChatService } from "../../services/api/chatService";
 
+var mThis;
 export default class MessageList extends Component {
     constructor(props) {
         super(props);
+        mThis = this;
+        const user = require('../../json_tmp/userProfile');
         this.state = {
-            id: 1,
+            id: user.id,
             isLoading: false,
-            pageNumber: 0,
+            numberOfPage: 0,
             messagesHistory: []
         }
         
@@ -33,20 +34,26 @@ export default class MessageList extends Component {
         )
     }
 
-    refresh = () => {
-        const self = this
-        setTimeout(() => { self.refs.flatList.scrollToEnd() });
-        //setTimeout(() => {self.refs.flatList.scrollToOffset({x: 0, y: 0, animated: true})});  
+    newMessage = () => {
+        if (this.props.data != null) {
+            let temp = this.state.messagesHistory;
+            temp.push(this.props.data);
+            this.setState(() => ({
+                messagesHistory: temp,
+              }));
+        }
+        
     }
 
     componentWillMount() {
-        this.fetchMoreData(this.state.pageNumber);
+        this.fetchMoreData();
     }
 
-    fetchMoreData(pageNumber) {
+    fetchMoreData = () => {
         let idFrom = 1;
         let idTo = 2;
-        ChatService.getMessagesHistory(idFrom, idTo, pageNumber, (data) => {
+        ChatService.getMessagesHistory(idFrom, idTo, this.state.numberOfPage, (data) => {
+            if (data.length == 0) return;
             let temp = this.state.messagesHistory;
             for (var i = 0; i < data.length; i++) {
                 let message = {
@@ -57,27 +64,25 @@ export default class MessageList extends Component {
                 }
                 temp.unshift(message);
             }
-            //alert(JSON.stringify(temp));
-            this.setState((prevState) => {
-                return {
-                    messagesHistory: temp,
-                };
-            });
+            
+            this.setState((previousState) => ({
+                messagesHistory: temp,
+                numberOfPage: previousState.numberOfPage + 1,
+              }));
         });
-        this.refresh();
     }
 
+    refresh(){
+        const self = this
+        setTimeout(() => { self.refs.flatList.scrollToEnd({animated: true}), 200 });
+    }
+    
     componentDidMount = () => {
         this.refresh();
     }
 
     loadMore = () => {
-        this.setState = { isLoading: true };
-        var temp = this.state.pageNumber + 1;
-        alert(temp);
-        this.setState = { pageNumber: temp};
-        this.fetchMoreData(this.state.pageNumber);
-        this.setState = { isLoading: false };
+        this.fetchMoreData();
     }
 
     render() {
@@ -85,11 +90,11 @@ export default class MessageList extends Component {
         return (
             <View style={styles.container}>
                 <FlatList
-                    //inverted
+                    ref={"flatList"}
                     refreshing={this.state.isLoading}
                     onRefresh={this.loadMore}
+                    //onEndReached={this.refresh}
                     style={{ height: Constants.SIZE_WINDOW.height - 150, padding: 10 }}
-                    ref={"flatList"}
                     data={this.state.messagesHistory}
                     keyExtractor={(item, index) => index}
                     renderItem={this.renderItem}

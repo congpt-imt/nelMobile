@@ -5,6 +5,7 @@ import { ColorTheme, Constants } from "../../constants";
 import Icon from "react-native-vector-icons/Ionicons";
 import MessageList from "../../components/chatComponent/messageList";
 import io from "socket.io-client/dist/socket.io"
+import { ChatService } from "../../services/api/chatService";
 
 var thisChat;
 export default class Chat extends Component {
@@ -17,7 +18,7 @@ export default class Chat extends Component {
             id: user.id,
             image: user.image,
             typed: '',
-            message: {},
+            message: null,
         };
         this.socket = io('http://125.234.14.225:8088')
 
@@ -28,8 +29,8 @@ export default class Chat extends Component {
                 "time": data.time,
                 "isCurrentUser": data.id_from == thisChat.state.id ? true : false,
             }
-            
-            thisChat.setState((prevState) => {
+
+            thisChat.setState(() => {
                 return {
                     typed: '',
                     message: messageRev
@@ -37,6 +38,8 @@ export default class Chat extends Component {
             });
 
             //Refresh FlatList
+            
+            thisChat.refs.messageList.newMessage();
             thisChat.refs.messageList.refresh();
 
         });
@@ -52,7 +55,7 @@ export default class Chat extends Component {
                 "time": "11:11",
             }
             this.socket.emit('message', messageSend);
-            thisChat.setState((prevState) => {
+            thisChat.setState(() => {
                 return {
                     typed: '',
                     message: messageSend
@@ -60,15 +63,15 @@ export default class Chat extends Component {
             });
 
             //Save message to DB
-            // const params = {
-            //     "fromId": thisChat.state.id,
-            //     "toId": thisChat.state.id == 1 ? 2 : 1,
-            //     "content": thisChat.state.typed,
-            //     "create_at": "2019-01-11",
-            //     "read": true,
-            // }
+            const params = {
+                "fromId": thisChat.state.id,
+                "toId": thisChat.state.id == 1 ? 2 : 1,
+                "content": thisChat.state.typed,
+                "create_at": "2019-01-17",
+                "read": true,
+            }
 
-            // ChatService.saveMessages(params);
+            ChatService.saveMessages(params);
         }
     }
 

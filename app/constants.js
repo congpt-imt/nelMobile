@@ -6,7 +6,7 @@ export const Constants = {
     VIEW_TYPE_HALF: 0,
     HEIGHT_BAR: 50,
     GOOGLE_API_KEY: 'AIzaSyARzBhXPhu4mvV-gM_2i6JWQvdGMuRkd1s',
-    TOKEN: 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOLFJPTEVfVVNFUiIsImV4cCI6MTU0NzY5MjUzMH0.uHFiS5vyuDlcwQXd5_Z0EVEO49KFYN7Xot9qnxxhJi6tA6UxQaQkbGx-CKlR2uhttnC-gRwnhYFk4I7Finw2Iw',
+    TOKEN: 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOLFJPTEVfVVNFUiIsImV4cCI6MTU0Nzc3NzY5N30.WQniKa3BD2t9nUd_m0PpwrRNxTsX_NhYCT7ySucZP1CqsmT8FMcEkywGL1Jc7ACGixOcatv0jgjLFJsJ4_dPJw',
 }
 
 export const ColorTheme = {
