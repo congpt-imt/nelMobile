@@ -4,11 +4,9 @@ import MessageRow from "./messageRow";
 import { Constants } from "../../constants"
 import { ChatService } from "../../services/api/chatService";
 
-var mThis;
 export default class MessageList extends Component {
     constructor(props) {
         super(props);
-        mThis = this;
         const user = require('../../json_tmp/userProfile');
         this.state = {
             id: user.id,
@@ -30,7 +28,7 @@ export default class MessageList extends Component {
         }
 
         this.itemLayout = (data, index) => (
-            { length: 100, offset: 100 * index, index }
+            { length: 120, offset: 120 * index, index }
         )
     }
 
@@ -58,7 +56,7 @@ export default class MessageList extends Component {
             for (var i = 0; i < data.length; i++) {
                 let message = {
                     "text": data[i].content,
-                    "image": data[i].id == this.state.id ? "" : temp.image,
+                    "image": data[i].id == this.state.id ? "" : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRetduIy4qTlGphdeh67IHF7hJgSq3ifDRf_pURPlMpbbXhbxk6',
                     "time": data[i].create_at,
                     "isCurrentUser": data[i].fromId == this.state.id ? true : false,
                 }

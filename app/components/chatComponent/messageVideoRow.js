@@ -9,9 +9,12 @@ export default class MessageVideoRow extends Component {
         return (
             <View>
                 <Video
+                    repeat={true}
+                    onError={this.videoError}
                     source={{uri: this.props.uri}}
                     style={{
                     alignSelf: 'stretch',
+                    width: Constants.SIZE_WINDOW.width/1.5,
                     height: Constants.SIZE_WINDOW.height / 4,
                     marginTop: 10 }}/>
             </View>

@@ -1,19 +1,18 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types'
-import {StyleSheet, View, Text} from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import AvatarBox from "../sharedComponent/avatarBox";
-import {ColorTheme} from "../../constants";
-import * as LinkPreview from "react-native-link-preview";
+import { ColorTheme } from "../../constants";
+import LinkPreview from "react-native-link-preview";
 import MessageYoutubeRow from "./messageYoutubeRow";
 import MessageImageRow from "./messageImageRow";
 import MessageVideoRow from "./messageVideoRow";
-import {Utils} from "../../utils/utils";
+import { Utils } from "../../utils/utils";
 
 export default class MessageRow extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            message: this.props.message.text,
             dataLink: {
                 url: '', title: '', description: '', images: '',
                 mediaType: '', contentType: '', favicons: ''
@@ -21,10 +20,11 @@ export default class MessageRow extends Component {
         }
     }
 
-    getImageOrVideo() {
-        let url = Utils.regexUrl(this.state.message);
-        let urlImg = Utils.regexImageUrl(this.state.message)
-        LinkPreview.getPreview(url).then(data => this.setState({dataLink: data}));
+    getImageOrVideo = () => {
+        const url = Utils.regexUrl(this.props.message.text);
+        if (url !== null) {
+            LinkPreview.getPreview(url.toString()).then(data => this.setState({ dataLink: data }));
+        }
     }
 
     componentWillMount() {
@@ -34,14 +34,17 @@ export default class MessageRow extends Component {
     render() {
         if (this.props.message.isCurrentUser) {
             return (
-                <View style={[styles.container, {alignItems: 'flex-end', marginLeft: 100}]}>
+                <View style={[styles.container, { alignItems: 'flex-end', marginLeft: 100 }]}>
                     <View style={styles.message_current_user_container}>
+                        <Text style={styles.message_time}>
+                            {this.props.message.time}
+                        </Text>
                         <View style={styles.message_current_user}>
                             <Text style={styles.message_text}>
                                 {this.props.message.text}
                             </Text>
-                            {this.state.dataLink.images !== '' ? <MessageImageRow image={this.state.dataLink.images.toString()}/> : null}
-                            {/*{img ? <MessageYoutubeRow/> : null}*/}
+                            {this.state.dataLink.mediaType == "image" ? <MessageImageRow image={this.state.dataLink.url.toString()} /> : null}
+                            {this.state.dataLink.mediaType == "video" ? <MessageVideoRow uri={this.state.dataLink.url.toString()} /> : null}
                         </View>
                     </View>
                 </View>
@@ -49,19 +52,23 @@ export default class MessageRow extends Component {
         }
 
         return (
-            <View style={[styles.container, {alignItems: 'flex-start', marginRight: 50}]}>
+            <View style={[styles.container, { alignItems: 'flex-start', marginRight: 50 }]}>
                 <View style={styles.avatar}>
                     <AvatarBox
                         sizeAvatar={40}
                         sizeIsOnline={10}
-                        image={this.props.message.image}/>
+                        image={this.props.message.image} />
                 </View>
                 <View style={styles.message_container}>
+                    <Text style={styles.message_time}>
+                        {this.props.message.time}
+                    </Text>
                     <View style={styles.message}>
                         <Text style={styles.message_text}>
                             {this.props.message.text}
                         </Text>
-                        {this.state.dataLink.images !== '' ? <MessageImageRow image={this.state.dataLink.images.toString()}/> : null}
+                        {this.state.dataLink.mediaType == "image" ? <MessageImageRow image={this.state.dataLink.url.toString()} /> : null}
+                        {this.state.dataLink.mediaType == "video" ? <MessageVideoRow uri={this.state.dataLink.url.toString()} /> : null}
                     </View>
                 </View>
             </View>
@@ -94,27 +101,30 @@ const styles = StyleSheet.create({
     },
     message_container: {
         flex: 1,
+        alignItems: 'flex-start'
     },
     message: {
         alignSelf: 'flex-start',
         backgroundColor: ColorTheme.MESSAGE_BOX_COLOR,
-        height: '100%',
         padding: 8,
         borderRadius: 5
     },
     message_current_user_container: {
         flex: 1,
+        alignItems: 'flex-end'
     },
     message_current_user: {
         alignSelf: 'flex-end',
         backgroundColor: ColorTheme.BAR_COLOR,
-        height: '100%',
         padding: 8,
         borderRadius: 5
     },
     message_text: {
-        flex: 1,
         color: 'white',
         fontSize: 16
+    },
+    message_time: {
+        color: '#9C9C9C',
+        fontSize: 10,
     }
 })

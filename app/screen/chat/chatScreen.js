@@ -38,7 +38,7 @@ export default class Chat extends Component {
             });
 
             //Refresh FlatList
-            
+
             thisChat.refs.messageList.newMessage();
             thisChat.refs.messageList.refresh();
 
@@ -47,12 +47,15 @@ export default class Chat extends Component {
 
     _onPressSend = () => {
         if (thisChat.state.typed != "") {
+            var hour = new Date().getHours();
+            var minute = new Date().getMinutes();
+
             let messageSend = {
                 "id_from": thisChat.state.id,
                 "id_to": thisChat.state.id == 1 ? 2 : 1,
                 "content": thisChat.state.typed,
                 "image": thisChat.state.image,
-                "time": "11:11",
+                "time": hour + ":" + minute,
             }
             this.socket.emit('message', messageSend);
             thisChat.setState(() => {
@@ -63,11 +66,14 @@ export default class Chat extends Component {
             });
 
             //Save message to DB
+            var date = new Date().getDate();
+            var month = new Date().getMonth() + 1;
+            var year = new Date().getFullYear();
             const params = {
                 "fromId": thisChat.state.id,
                 "toId": thisChat.state.id == 1 ? 2 : 1,
                 "content": thisChat.state.typed,
-                "create_at": "2019-01-17",
+                "create_at": year + "-0" + month + "-" + date,
                 "read": true,
             }
 
