@@ -16,8 +16,10 @@ export default class MessageList extends Component {
         }
         
         this.renderItem = ({ item }) => {
-            return <MessageRow message={item} />
-        }
+            return (
+                <MessageRow message={item} />
+            )
+        };
 
         this.emptyList = () => {
             return (
@@ -35,12 +37,11 @@ export default class MessageList extends Component {
     newMessage = () => {
         if (this.props.data != null) {
             let temp = this.state.messagesHistory;
-            temp.push(this.props.data);
+            temp.unshift(this.props.data);
             this.setState(() => ({
                 messagesHistory: temp,
-              }));
+            }));
         }
-        
     }
 
     componentWillMount() {
@@ -52,7 +53,7 @@ export default class MessageList extends Component {
         let idTo = 2;
         ChatService.getMessagesHistory(idFrom, idTo, this.state.numberOfPage, (data) => {
             if (data.length == 0) return;
-            let temp = this.state.messagesHistory;
+            var temp = this.state.messagesHistory;
             for (var i = 0; i < data.length; i++) {
                 let message = {
                     "text": data[i].content,
@@ -60,21 +61,21 @@ export default class MessageList extends Component {
                     "time": data[i].create_at,
                     "isCurrentUser": data[i].fromId == this.state.id ? true : false,
                 }
-                temp.unshift(message);
+                temp.push(message);
             }
-            
+
             this.setState((previousState) => ({
                 messagesHistory: temp,
                 numberOfPage: previousState.numberOfPage + 1,
-              }));
+            }));
         });
     }
 
-    refresh(){
+    refresh() {
         const self = this
-        setTimeout(() => { self.refs.flatList.scrollToEnd({animated: true}), 200 });
+        //setTimeout(() => { self.refs.flatList.scrollToEnd({animated: true}), 200 });
     }
-    
+
     componentDidMount = () => {
         this.refresh();
     }
@@ -84,20 +85,20 @@ export default class MessageList extends Component {
     }
 
     render() {
-        const data = this.props.data
         return (
             <View style={styles.container}>
                 <FlatList
+                    inverted
                     ref={"flatList"}
                     refreshing={this.state.isLoading}
-                    onRefresh={this.loadMore}
-                    //onEndReached={this.refresh}
-                    style={{ height: Constants.SIZE_WINDOW.height - 150, padding: 10 }}
+                    //onRefresh={this.loadMore}
+                    onEndReached={this.loadMore}
                     data={this.state.messagesHistory}
                     keyExtractor={(item, index) => index}
                     renderItem={this.renderItem}
                     getItemLayout={this.itemLayout}
                     ListEmptyComponent={this.emptyList}
+                    style={{ height: Constants.SIZE_WINDOW.height - 150, padding: 10 }}
                 />
             </View>
         )

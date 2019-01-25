@@ -13,6 +13,7 @@ export default class MessageRow extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            content: this.props.message.text,
             dataLink: {
                 url: '', title: '', description: '', images: '',
                 mediaType: '', contentType: '', favicons: ''
@@ -21,9 +22,10 @@ export default class MessageRow extends Component {
     }
 
     getImageOrVideo = () => {
-        const url = Utils.regexUrl(this.props.message.text);
-        if (url !== null) {
-            LinkPreview.getPreview(url.toString()).then(data => this.setState({ dataLink: data }));
+        let url = Utils.regexUrl(this.props.message.text);
+        if ((url !== '') && (url !== null)) {
+            LinkPreview.getPreview(url.toString()).then(data => {this.setState({ dataLink: data })});
+            
         }
     }
 
@@ -43,8 +45,8 @@ export default class MessageRow extends Component {
                             <Text style={styles.message_text}>
                                 {this.props.message.text}
                             </Text>
-                            {this.state.dataLink.mediaType == "image" ? <MessageImageRow image={this.state.dataLink.url.toString()} /> : null}
-                            {this.state.dataLink.mediaType == "video" ? <MessageVideoRow uri={this.state.dataLink.url.toString()} /> : null}
+                            {this.state.dataLink.mediaType === 'image' ? <MessageImageRow image={this.state.dataLink.url} /> : null}
+                            {this.state.dataLink.mediaType === 'video' ? <MessageVideoRow uri={this.state.dataLink.url} /> : null}
                         </View>
                     </View>
                 </View>
@@ -67,8 +69,8 @@ export default class MessageRow extends Component {
                         <Text style={styles.message_text}>
                             {this.props.message.text}
                         </Text>
-                        {this.state.dataLink.mediaType == "image" ? <MessageImageRow image={this.state.dataLink.url.toString()} /> : null}
-                        {this.state.dataLink.mediaType == "video" ? <MessageVideoRow uri={this.state.dataLink.url.toString()} /> : null}
+                        {this.state.dataLink.mediaType === 'image' ? <MessageImageRow image={this.state.dataLink.url} /> : null}
+                        {this.state.dataLink.mediaType === 'video' ? <MessageVideoRow uri={this.state.dataLink.url} /> : null}
                     </View>
                 </View>
             </View>

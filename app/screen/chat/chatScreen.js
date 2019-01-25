@@ -77,7 +77,7 @@ export default class Chat extends Component {
                 "read": true,
             }
 
-            ChatService.saveMessages(params);
+            //ChatService.saveMessages(params);
         }
     }
 
