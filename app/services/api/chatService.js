@@ -1,10 +1,20 @@
 import { Constants } from "../../constants";
 
 export class ChatService {
-    static getChatHistory() {
-        const chatHistory = require('../../json_tmp/teachers');
-        const result = chatHistory.data;
-        return result;
+    static async getChatHistory(id, succeeded, failed) {
+        try {
+            let response = await fetch('http://192.168.137.1:8080/api/nel-messages-histories/history/' + id, {
+                method: 'GET',
+                headers: {
+                    Authorization: 'Bearer ' + Constants.TOKEN,
+                    Accept: 'application/json',
+                }
+            });
+            let messages = await response.json();
+            succeeded(messages.data);
+        } catch (error) {
+            failed(error);
+        }
     }
 
     static async getMessagesHistory(idFrom, idTo, page, succeeded, failed) {

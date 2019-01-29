@@ -23,7 +23,7 @@ export default class MessageRow extends Component {
 
     getImageOrVideo = () => {
         let url = Utils.regexUrl(this.props.message.text);
-        if ((url !== '') && (url !== null)) {
+        if (url !== null) {
             LinkPreview.getPreview(url.toString()).then(data => {this.setState({ dataLink: data })});
             
         }

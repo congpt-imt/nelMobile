@@ -40,6 +40,22 @@ export class UserService {
         }
     }
 
+    static async getUserById(id, succeeded, failed) {
+        try {
+            let response = await fetch('http://192.168.137.1:8080/api/nel-user-management/nel-users/' + id, {
+                method: 'GET',
+                headers: {
+                    Authorization: 'Bearer ' + Constants.TOKEN,
+                    Accept: 'application/json',
+                }
+            });
+            let data = await response.json();
+            succeeded(data);
+        } catch (error) {
+            failed(error);
+        }
+    }
+
     static getProfile() {
         const profile = require('../../json_tmp/userProfile');
         return profile.data;

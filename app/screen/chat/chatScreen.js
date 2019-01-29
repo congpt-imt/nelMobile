@@ -15,33 +15,35 @@ export default class Chat extends Component {
         const user = require('../../json_tmp/userProfile');
 
         thisChat.state = {
-            id: user.id,
+            myId: user.id,
+            otherId: this.props.navigation.state.params.id,
             image: user.image,
+            otherImage: this.props.navigation.state.params.image,
             typed: '',
             message: null,
         };
         this.socket = io('http://125.234.14.225:8088')
 
         this.socket.on('message', function (data) {
-            let messageRev = {
-                "text": data.content,
-                "image": data.id == thisChat.state.id ? "" : data.image,
-                "time": data.time,
-                "isCurrentUser": data.id_from == thisChat.state.id ? true : false,
+            if (((data.id_from == thisChat.state.myId) && (data.id_to == thisChat.state.otherId)) || 
+                ((data.id_from == thisChat.state.otherId) && (data.id_to == thisChat.state.myId))) {
+                let messageRev = {
+                    "text": data.content,
+                    "image": data.id_from == thisChat.state.myId ? "" : thisChat.state.otherImage,
+                    "time": data.time,
+                    "isCurrentUser": data.id_from == thisChat.state.myId ? true : false,
+                }
+
+                thisChat.setState(() => {
+                    return {
+                        typed: '',
+                        message: messageRev
+                    };
+                });
+
+                //Refresh FlatList
+                thisChat.refs.messageList.newMessage();
             }
-
-            thisChat.setState(() => {
-                return {
-                    typed: '',
-                    message: messageRev
-                };
-            });
-
-            //Refresh FlatList
-
-            thisChat.refs.messageList.newMessage();
-            thisChat.refs.messageList.refresh();
-
         });
     }
 
@@ -51,8 +53,8 @@ export default class Chat extends Component {
             var minute = new Date().getMinutes();
 
             let messageSend = {
-                "id_from": thisChat.state.id,
-                "id_to": thisChat.state.id == 1 ? 2 : 1,
+                "id_from": thisChat.state.myId,
+                "id_to": thisChat.state.otherId,
                 "content": thisChat.state.typed,
                 "image": thisChat.state.image,
                 "time": hour + ":" + minute,
@@ -70,8 +72,8 @@ export default class Chat extends Component {
             var month = new Date().getMonth() + 1;
             var year = new Date().getFullYear();
             const params = {
-                "fromId": thisChat.state.id,
-                "toId": thisChat.state.id == 1 ? 2 : 1,
+                "fromId": thisChat.state.myId,
+                "toId": thisChat.state.otherId,
                 "content": thisChat.state.typed,
                 "create_at": year + "-0" + month + "-" + date,
                 "read": true,
@@ -85,7 +87,12 @@ export default class Chat extends Component {
         return (
             <View style={generalStyle.container} >
                 <View style={styles.message_list}>
-                    <MessageList ref={'messageList'} data={thisChat.state.message} />
+                    <MessageList
+                        ref={'messageList'}
+                        data={thisChat.state.message}
+                        otherId={this.state.otherId}
+                        otherImage={this.state.otherImage}
+                    />
                 </View>
                 <View style={styles.message_form}>
                     <View style={styles.message_input}>

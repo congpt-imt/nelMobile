@@ -8,7 +8,7 @@ export default class ChatHistory extends Component {
     render() {
         return (
             <View style={generalStyle.container}>
-                <ChatHistoryListView onPress={() => this.props.navigation.navigate('Chat')}/>
+                <ChatHistoryListView onPress={this.props.navigation}/>
             </View>
         )
     }

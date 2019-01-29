@@ -45,7 +45,7 @@ class DrawerScreen extends Component {
 
                         <TouchableNativeFeedback useForeground={true}
                                                  background={TouchableNativeFeedback.Ripple('rgba(240, 240, 240, 0.1)', false)}
-                                                 onPress={this.navigateToScreen('Chat')}>
+                                                 onPress={this.navigateToScreen('ChatHistory')}>
                             <View style={styles.itemView}>
                                 <Entypo name={'chat'} size={18} color={'#fff'} style={styles.icon}/>
                                 <Text style={styles.itemDrawer}>Chat</Text>

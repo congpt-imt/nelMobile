@@ -14,7 +14,7 @@ export default class MessageList extends Component {
             numberOfPage: 0,
             messagesHistory: []
         }
-        
+
         this.renderItem = ({ item }) => {
             return (
                 <MessageRow message={item} />
@@ -49,15 +49,15 @@ export default class MessageList extends Component {
     }
 
     fetchMoreData = () => {
-        let idFrom = 1;
-        let idTo = 2;
+        let idFrom = this.state.id;
+        let idTo = this.props.otherId;
         ChatService.getMessagesHistory(idFrom, idTo, this.state.numberOfPage, (data) => {
             if (data.length == 0) return;
             var temp = this.state.messagesHistory;
             for (var i = 0; i < data.length; i++) {
                 let message = {
                     "text": data[i].content,
-                    "image": data[i].id == this.state.id ? "" : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRetduIy4qTlGphdeh67IHF7hJgSq3ifDRf_pURPlMpbbXhbxk6',
+                    "image": data[i].id == this.state.id ? "" : this.props.otherImage,
                     "time": data[i].create_at,
                     "isCurrentUser": data[i].fromId == this.state.id ? true : false,
                 }
@@ -69,15 +69,6 @@ export default class MessageList extends Component {
                 numberOfPage: previousState.numberOfPage + 1,
             }));
         });
-    }
-
-    refresh() {
-        const self = this
-        //setTimeout(() => { self.refs.flatList.scrollToEnd({animated: true}), 200 });
-    }
-
-    componentDidMount = () => {
-        this.refresh();
     }
 
     loadMore = () => {

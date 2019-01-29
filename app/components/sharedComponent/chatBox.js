@@ -3,21 +3,41 @@ import { StyleSheet, Text, TouchableNativeFeedback, View } from 'react-native';
 import AvatarBox from "./avatarBox";
 import { generalStyle } from "../../resources/stylesheet/stylesheet";
 import { Utils } from "../../utils/utils";
+import { UserService } from "../../services/api/userService";
 
 export default class ChatBox extends Component {
+    constructor(props) {
+        super(props);
+        const user = require('../../json_tmp/userProfile');
+        this.state = {
+            id: user.id == this.props.data.fromId ? this.props.data.toId : this.props.data.fromId,
+            name: null,
+            image: null,
+        };
+    }
+
+    componentWillMount() {
+        UserService.getUserById(this.state.id, (data) => {
+            this.setState({
+                image: data.imageUrl,
+                name: data.username,
+            })
+        });
+    }
 
     render() {
-        const { onPress, image, name } = this.props;
-        const text = 'Chào bạn, rất vui được gặp bạn trong buổi sáng hôm nay';
-
+        const { onPress } = this.props;
         return (
             <View style={styles.container}>
-                <TouchableNativeFeedback onPress={onPress} useForeground={true}
+                <TouchableNativeFeedback 
+                    onPress={() => this.props.onPress.navigate('Chat', 
+                                {id: this.state.id, image: this.state.image})} 
+                    useForeground={true}
                     background={TouchableNativeFeedback.Ripple('rgba(240, 240, 240, 0.1)', false)}>
                     <View style={generalStyle.container_row}>
                         <View style={styles.image_teacher}>
                             <AvatarBox
-                                image={image}
+                                image={this.state.image}
                                 sizeAvatar={45}
                                 sizeIsOnline={10}
                             />
@@ -25,17 +45,16 @@ export default class ChatBox extends Component {
 
                         <View style={styles.chat_box}>
                             <View style={styles.teacher_name}>
-                                <Text style={styles.text_name}>{Utils.truncate(name, 15)}</Text>
-                                <Text style={styles.last_date_chat}>29/11/2018</Text>
+                                <Text style={styles.text_name}>{Utils.truncate(this.state.name, 15)}</Text>
+                                <Text style={styles.last_date_chat}>{this.props.data.create_at}</Text>
                             </View>
                             <View style={styles.chat_text}>
-                                <Text style={styles.last_text_chat}>{Utils.truncate(text, 33)}</Text>
-                                <Text style={styles.last_hour_chat}>11:20</Text>
+                                <Text style={styles.last_text_chat}>{Utils.truncate(this.props.data.content, 30)}</Text>
+                                {!this.props.data.read ? <Text style={styles.seen}>⬤</Text> : null}
                             </View>
                         </View>
                     </View>
                 </TouchableNativeFeedback>
-                <View style={styles.line} />
             </View>
         );
     }
@@ -86,17 +105,11 @@ const styles = StyleSheet.create({
         color: '#C1C1C1',
         fontStyle: 'italic',
     },
-    last_hour_chat: {
+    seen: {
         flex: 2 / 10,
         marginTop: 1,
         fontSize: 13,
-        color: '#C1C1C1',
+        color: '#678DBA',
         textAlign: 'right',
     },
-    line: {
-        height: 0.5,
-        backgroundColor: '#678DBA',
-        marginLeft: 20,
-        marginRight: 20
-    }
 });

@@ -32,7 +32,7 @@ export default class HeaderBar extends Component {
                 <View style={styles.directional}>
                     <FontAwesome5 onPress={() => this.props.navigation.navigate('Home')} name={'home'} size={24}
                                   color={'#fff'} style={styles.icon_home}/>
-                    <Entypo onPress={() => this.props.navigation.navigate('Chat')} name={'chat'} size={24}
+                    <Entypo onPress={() => this.props.navigation.navigate('ChatHistory')} name={'chat'} size={24}
                             color={'#fff'} style={styles.icon_bell}/>
                     <FontAwesome5 name={'bell'} size={24} color={'#fff'} style={styles.icon_bell}/>
                 </View>
